@@ -57,6 +57,10 @@ Open http://localhost:3000/ — login or register, then you'll be taken to `/mee
 | `npm start`          | Start the production server           |
 | `npx tsx scripts/seed-roles.ts` | Seed default roles into MongoDB |
 
+## API docs
+
+Interactive Swagger UI available at **http://localhost:3000/api-docs** (no link in the app UI — navigate directly). Raw OpenAPI 3.0 spec served at `/api/docs`.
+
 ## Routes
 
 | Path        | Content                                       | Auth |
@@ -66,6 +70,7 @@ Open http://localhost:3000/ — login or register, then you'll be taken to `/mee
 | `/meet`     | Attendee CRUD, timer, save sessions, share    | Yes  |
 | `/roles`    | Role CRUD (custom labels + hourly rates)       | Yes  |
 | `/presets`  | Meeting Sessions — Reuse or Delete             | Yes  |
+| `/api-docs` | Swagger UI interactive API documentation       | No  |
 
 ## Tech stack
 
@@ -76,6 +81,7 @@ Open http://localhost:3000/ — login or register, then you'll be taken to `/mee
 | Styling        | Tailwind CSS 4                 |
 | Auth           | JWT (httpOnly cookie, bcryptjs)|
 | Database       | MongoDB / Mongoose             |
+| API docs       | OpenAPI 3.0 + Swagger UI       |
 | Sharing        | URL query params               |
 | Hosting        | Vercel (free tier)             |
 
@@ -90,7 +96,11 @@ src/
 │   ├── meet/page.tsx              # Timer + attendees (/meet)
 │   ├── roles/page.tsx             # Role CRUD (/roles)
 │   ├── presets/page.tsx           # Meeting Sessions (/presets)
+│   ├── api-docs/                  # Swagger UI page (/api-docs)
+│   │   ├── page.tsx               # Client-side Swagger UI renderer
+│   │   └── swagger-dark.css       # Dark theme overrides
 │   └── api/                       # API routes
+│       ├── docs/route.ts          # OpenAPI 3.0 JSON spec (/api/docs)
 │       ├── auth/                  # register, login, me, logout
 │       ├── attendees/             # session persistence (save/load/clear)
 │       ├── presets/               # meeting session CRUD
@@ -117,13 +127,15 @@ src/
 ├── lib/
 │   ├── auth.ts                     # JWT helpers, bcrypt, cookies
 │   ├── db.ts                       # Mongoose connection
+│   ├── openapi.ts                  # Full OpenAPI 3.0 spec (all routes + schemas)
 │   └── models/
 │       ├── User.ts                  # User model
 │       ├── AttendeeSession.ts       # Attendee session (one per user)
 │       ├── Preset.ts               # Meeting session preset (many per user)
 │       └── Role.ts                 # Role model (label + hourlyRate)
 ├── types/
-│   └── attendee.ts                 # Attendee interface + helpers
+│   ├── attendee.ts                 # Attendee interface + helpers
+│   └── swagger-ui-react.d.ts       # Type declarations for swagger-ui-react
 └── scripts/
     └── seed-roles.ts               # One-shot MongoDB role seeder
 ```
