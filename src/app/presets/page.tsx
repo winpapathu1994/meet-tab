@@ -1,0 +1,145 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { toRoleCounts } from "@/types/attendee";
+
+interface PresetEntry {
+  name: string;
+  roleId: string;
+}
+
+interface PresetSummary {
+  _id: string;
+  name: string;
+  attendees: PresetEntry[];
+  createdAt: string;
+}
+
+export default function PresetsPage() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  const [presets, setPresets] = useState<PresetSummary[]>([]);
+  const [fetching, setFetching] = useState(true);
+
+  // Fetch presets
+  const fetchPresets = useCallback(() => {
+    setFetching(true);
+    fetch("/api/presets")
+      .then((res) => res.json())
+      .then((data) => setPresets(data.presets ?? []))
+      .catch(() => setPresets([]))
+      .finally(() => setFetching(false));
+  }, []);
+
+  useEffect(() => {
+    if (user) fetchPresets();
+  }, [user, fetchPresets]);
+
+  // Auth guard — redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/");
+    }
+  }, [loading, user, router]);
+
+  const handleLoad = useCallback(
+    (preset: PresetSummary) => {
+      const entries = preset.attendees.map((a) => ({
+        id: crypto.randomUUID(),
+        name: a.name,
+        roleId: a.roleId,
+      }));
+      const counts = toRoleCounts(entries);
+      const segments = Object.entries(counts)
+        .filter(([, count]) => count > 0)
+        .map(([id, count]) => `${id}:${count}`)
+        .join(",");
+      const names = entries.map((e) => e.name).join(",");
+      const params = new URLSearchParams();
+      if (segments) params.set("r", segments);
+      if (names) params.set("n", names);
+      params.set("name", preset.name);
+      router.push(`/meet?${params.toString()}`);
+    },
+    [router],
+  );
+
+  const handleDelete = useCallback(async (id: string) => {
+    const res = await fetch(`/api/presets/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setPresets((prev) => prev.filter((p) => p._id !== id));
+    }
+  }, []);
+
+  // Loading spinner while auth resolves
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // Not authenticated — guard will redirect, show nothing
+  if (!user) return null;
+
+  return (
+    <div className="min-h-screen bg-slate-900 flex flex-col items-center p-6 pt-8 gap-6">
+      <h1 className="text-3xl font-bold text-white tracking-tight">
+        Meeting Sessions
+      </h1>
+
+      <div className="w-full max-w-lg mx-auto space-y-3">
+        {fetching ? (
+          <p className="text-slate-500 text-sm text-center py-8">Loading…</p>
+        ) : presets.length === 0 ? (
+          <p className="text-slate-500 text-sm text-center py-8">
+            No saved sessions yet. Create one from the Meet tab.
+          </p>
+        ) : (
+          <ul className="space-y-1">
+            {presets.map((p) => (
+              <li
+                key={p._id}
+                className="flex items-center justify-between gap-3 py-3 px-1 border-b border-slate-800"
+              >
+                <button
+                  onClick={() => handleLoad(p)}
+                  className="flex-1 text-left min-w-0"
+                >
+                  <div className="text-white font-medium truncate">
+                    {p.name}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-0.5">
+                    {p.attendees.length}{" "}
+                    {p.attendees.length === 1 ? "person" : "people"} ·{" "}
+                    {new Date(p.createdAt).toLocaleDateString()}
+                  </div>
+                </button>
+                <div className="flex items-center gap-1 shrink-0">
+                  <button
+                    onClick={() => handleLoad(p)}
+                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                  >
+                    🔄 Reuse
+                  </button>
+                  <button
+                    onClick={() => handleDelete(p._id)}
+                    className="w-8 h-8 rounded-md text-slate-400 hover:text-red-400 hover:bg-slate-700 transition-colors text-sm"
+                    aria-label={`Delete ${p.name}`}
+                    title="Delete"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
