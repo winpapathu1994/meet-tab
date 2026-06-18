@@ -83,7 +83,7 @@ Interactive Swagger UI available at **http://localhost:3000/api-docs** (no link 
 | Database       | MongoDB / Mongoose             |
 | API docs       | OpenAPI 3.0 + Swagger UI       |
 | Sharing        | URL query params               |
-| Hosting        | Vercel (free tier)             |
+
 
 ## Project structure
 

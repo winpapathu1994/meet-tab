@@ -70,7 +70,7 @@ export default function RegisterPage() {
             required
             autoFocus
             className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-            placeholder="Ko Aung"
+            placeholder="your name"
           />
         </div>
 
