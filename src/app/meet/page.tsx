@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import AttendeeManager from "@/components/AttendeeManager";
 import CostDisplay from "@/components/CostDisplay";
@@ -18,13 +18,6 @@ export default function MeetPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  // Auth guard — redirect to login if not authenticated
-  useEffect(() => {
-    if (!loading && !user) {
-      router.replace("/");
-    }
-  }, [loading, user, router]);
-
   const { attendees, addAttendee, updateAttendee, deleteAttendee, replaceAttendees, shareUrl } =
     useAttendees();
   const { state, elapsed, start, pause, resume, reset } = useTimer();
@@ -33,6 +26,16 @@ export default function MeetPage() {
 
   // Session name from URL (set when reusing a saved session)
   const [sessionName, setSessionName] = useState<string | null>(null);
+
+  // ── Share link detection ──
+  const hasShareParams = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    const params = new URLSearchParams(window.location.search);
+    return params.has("r");
+  }, []);
+
+  const isGuest = !user && hasShareParams;
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
@@ -40,6 +43,13 @@ export default function MeetPage() {
       setSessionName(name);
     }
   }, []);
+
+  // Auth guard — redirect to login only if NOT a share link
+  useEffect(() => {
+    if (!loading && !user && !hasShareParams) {
+      router.replace("/");
+    }
+  }, [loading, user, router, hasShareParams]);
 
   const totalRatePerHour = attendees.reduce((sum, a) => {
     if (a.hourlyRate > 0) return sum + a.hourlyRate;
@@ -124,10 +134,11 @@ export default function MeetPage() {
     );
   }
 
-  // Not authenticated — guard will redirect, show nothing
-  if (!user) return null;
+  // Not authenticated AND not a share link — guard will redirect, show nothing
+  if (!user && !hasShareParams) return null;
 
   const isIdle = state === "idle";
+  const readOnly = isGuest;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 sm:p-6">
@@ -151,6 +162,20 @@ export default function MeetPage() {
             )}
           </div>
 
+          {/* View-only badge for guests */}
+          {readOnly && (
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-700 dark:text-amber-400 text-sm font-medium">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              View-only mode
+              <span className="hidden sm:inline text-xs font-normal text-amber-600 dark:text-amber-500">
+                — sign in to edit
+              </span>
+            </div>
+          )}
+
           {/* Currency selector — subtle top-right feel */}
           <div className="self-end">
             <CurrencyToggle currency={currency} onChange={setCurrency} />
@@ -164,17 +189,22 @@ export default function MeetPage() {
               onAdd={addAttendee}
               onUpdate={updateAttendee}
               onDelete={deleteAttendee}
+              readOnly={readOnly}
             />
-            {/* Divider */}
-            <div className="border-t border-slate-100 dark:border-slate-800" />
-            <AttendeePersistence
-              attendees={attendees}
-              onLoad={replaceAttendees}
-            />
-            <SavePreset attendees={attendees} />
+            {!readOnly && (
+              <>
+                {/* Divider */}
+                <div className="border-t border-slate-100 dark:border-slate-800" />
+                <AttendeePersistence
+                  attendees={attendees}
+                  onLoad={replaceAttendees}
+                />
+                <SavePreset attendees={attendees} />
+              </>
+            )}
           </div>
 
-          {/* Start button */}
+          {/* Start / Copy Link */}
           <TimerControls
             state={state}
             hasRoles={hasRoles}
@@ -184,7 +214,21 @@ export default function MeetPage() {
             onReset={reset}
             onShare={handleShare}
             onEndMeeting={handleEndMeeting}
+            readOnly={readOnly}
           />
+
+          {/* Sign-in prompt for guests */}
+          {readOnly && (
+            <p className="text-xs text-slate-400 dark:text-slate-500 text-center">
+              Want to edit or start a meeting?{" "}
+              <button
+                onClick={() => router.push("/")}
+                className="text-primary hover:text-primary-hover font-medium underline underline-offset-2 transition-colors"
+              >
+                Sign in
+              </button>
+            </p>
+          )}
         </div>
       ) : (
         /* ────────────────────────────────── *
