@@ -21,7 +21,7 @@ export default function AuthNav() {
       <span className="text-gray-500 dark:text-slate-400 text-sm px-2">{user.name}</span>
       <button
         onClick={handleLogout}
-        className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:text-red-400 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+        className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:text-danger hover:bg-gray-100 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors"
       >
         Logout
       </button>

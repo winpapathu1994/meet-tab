@@ -101,10 +101,6 @@ export default function RoleManager() {
 
   return (
     <div className="w-full max-w-lg mx-auto space-y-3">
-      <h2 className="text-lg font-semibold text-gray-600 dark:text-slate-300 uppercase tracking-wider">
-        Roles
-      </h2>
-
       {/* ── Error ── */}
       {error && <p className="text-red-400 text-sm">{error}</p>}
 
@@ -130,7 +126,7 @@ export default function RoleManager() {
                     onChange={(e) => setFormLabel(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Role label"
-                    className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                    className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
                   />
                   <input
                     type="number"
@@ -139,7 +135,7 @@ export default function RoleManager() {
                     onKeyDown={handleKeyDown}
                     placeholder="Rate"
                     min={0}
-                    className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                    className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="flex gap-2 justify-end">
@@ -152,7 +148,7 @@ export default function RoleManager() {
                   <button
                     onClick={handleSave}
                     disabled={!formLabel.trim() || saving}
-                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
+                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
                   >
                     {saving ? "…" : "Save"}
                   </button>
@@ -209,7 +205,7 @@ export default function RoleManager() {
               onChange={(e) => setFormLabel(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Role label"
-              className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
             />
             <input
               type="number"
@@ -218,7 +214,7 @@ export default function RoleManager() {
               onKeyDown={handleKeyDown}
               placeholder="Rate"
               min={0}
-              className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
             />
           </div>
           <div className="flex gap-2 justify-end">
@@ -231,7 +227,7 @@ export default function RoleManager() {
             <button
               onClick={handleSave}
               disabled={!formLabel.trim() || saving}
-              className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
+              className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
             >
               {saving ? "…" : "Create"}
             </button>

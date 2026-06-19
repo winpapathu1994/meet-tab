@@ -1,3 +1,24 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Semantic color tokens */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-secondary: #6b7280;
+  --color-secondary-hover: #4b5563;
+  --color-accent: #059669;
+  --color-accent-hover: #047857;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+}
+
+/* Button base styles — use @layer to ensure proper cascade */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-colors
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}

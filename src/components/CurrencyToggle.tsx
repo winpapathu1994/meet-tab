@@ -14,9 +14,9 @@ export default function CurrencyToggle({ currency, onChange }: Props) {
         <button
           key={c}
           onClick={() => onChange(c)}
-          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 ${
             currency === c
-              ? "bg-gray-200 text-gray-900 dark:bg-slate-600 dark:text-white"
+              ? "bg-primary text-white"
               : "text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700"
           }`}
         >

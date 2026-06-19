@@ -78,7 +78,7 @@ export default function PresetsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -122,13 +122,13 @@ export default function PresetsPage() {
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => handleLoad(p)}
-                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 text-white transition-colors"
                   >
                     🔄 Reuse
                   </button>
                   <button
                     onClick={() => handleDelete(p._id)}
-                    className="w-8 h-8 rounded-md text-gray-500 hover:text-red-400 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-red-400 dark:hover:bg-slate-700 transition-colors text-sm"
+                    className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
                     aria-label={`Delete ${p.name}`}
                     title="Delete"
                   >

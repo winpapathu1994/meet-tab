@@ -26,7 +26,7 @@ export default function RegisterPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default function RegisterPage() {
             onChange={(e) => setName(e.target.value)}
             required
             autoFocus
-            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
             placeholder="your name"
           />
         </div>
@@ -81,7 +81,7 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
             placeholder="you@example.com"
           />
         </div>
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
             placeholder="At least 6 characters"
           />
         </div>
@@ -105,7 +105,7 @@ export default function RegisterPage() {
             {errorCode === "email_exists" && (
               <p className="text-gray-500 dark:text-slate-400 mt-1">
                 Already have an account?{" "}
-                <Link href="/" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 underline underline-offset-2">
+                <Link href="/" className="text-primary hover:text-primary-hover underline underline-offset-2">
                   Login here
                 </Link>
               </p>
@@ -116,14 +116,14 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={busy}
-          className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white font-semibold transition-colors"
+          className="w-full py-2.5 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
         >
           {busy ? "Creating account…" : "Register"}
         </button>
 
         <p className="text-center text-sm text-gray-400 dark:text-slate-500">
           Already have an account?{" "}
-          <Link href="/" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300">
+          <Link href="/" className="text-primary hover:text-primary-hover">
             Login
           </Link>
         </p>

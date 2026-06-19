@@ -119,7 +119,7 @@ export default function AttendeeManager({
                     onChange={(e) => setFormName(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Name"
-                    className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                    className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
                   />
                   <RoleSelect
                     roles={apiRoles}
@@ -132,14 +132,14 @@ export default function AttendeeManager({
                 <div className="flex gap-2 justify-end">
                   <button
                     onClick={cancel}
-                    className="px-3 py-1.5 rounded-md text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
+                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={!formName.trim()}
-                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
+                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
                   >
                     Save
                   </button>
@@ -165,7 +165,7 @@ export default function AttendeeManager({
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => openEdit(a)}
-                    className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors text-sm"
+                    className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 transition-colors text-sm"
                     aria-label={`Edit ${a.name || "unnamed attendee"}`}
                     title="Edit"
                   >
@@ -173,7 +173,7 @@ export default function AttendeeManager({
                   </button>
                   <button
                     onClick={() => onDelete(a.id)}
-                    className="w-8 h-8 rounded-md text-gray-500 hover:text-red-400 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-red-400 dark:hover:bg-slate-700 transition-colors text-sm"
+                    className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
                     aria-label={`Remove ${a.name || "unnamed attendee"}`}
                     title="Remove"
                   >
@@ -197,7 +197,7 @@ export default function AttendeeManager({
               onChange={(e) => setFormName(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Name"
-              className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
             />
             <RoleSelect
               roles={apiRoles}
@@ -210,14 +210,14 @@ export default function AttendeeManager({
           <div className="flex gap-2 justify-end">
             <button
               onClick={cancel}
-              className="px-3 py-1.5 rounded-md text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
+              className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={!formName.trim()}
-              className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
+              className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
             >
               Add
             </button>
