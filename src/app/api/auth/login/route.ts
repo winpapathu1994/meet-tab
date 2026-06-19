@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/db";
 import { User } from "@/lib/models/User";
 import { jsonResponse, setTokenCookie, signToken, verifyPassword } from "@/lib/auth";
+import mongoose from "mongoose";
 
 export async function POST(request: Request) {
   try {
@@ -25,8 +26,12 @@ export async function POST(request: Request) {
     const token = signToken({ userId: user._id.toString() });
     await setTokenCookie(token);
 
+    // Read image via raw collection to avoid Mongoose schema cache issues
+    const usersCol = mongoose.connection.db!.collection("users");
+    const doc = await usersCol.findOne({ _id: user._id }, { projection: { image: 1 } });
+
     return jsonResponse({
-      user: { id: user._id, name: user.name, email: user.email, image: user.image || "" },
+      user: { id: user._id, name: user.name, email: user.email, image: doc?.image || "" },
     });
   } catch (error) {
     console.error("Login error:", error);

@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/db";
 import { User } from "@/lib/models/User";
 import { getCurrentUserId, hashPassword, jsonResponse, verifyPassword } from "@/lib/auth";
+import mongoose from "mongoose";
 
 export async function PUT(request: Request) {
   try {
@@ -37,8 +38,12 @@ export async function PUT(request: Request) {
 
     await user.save();
 
+    // Read image via raw collection to avoid Mongoose schema cache stripping the field
+    const usersCol = mongoose.connection.db!.collection("users");
+    const doc = await usersCol.findOne({ _id: user._id }, { projection: { image: 1 } });
+
     return jsonResponse({
-      user: { id: user._id, name: user.name, email: user.email, image: user.image || "" },
+      user: { id: user._id, name: user.name, email: user.email, image: doc?.image || "" },
     });
   } catch (error) {
     console.error("Update profile error:", error);
