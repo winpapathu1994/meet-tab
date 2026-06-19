@@ -28,7 +28,7 @@ export default function CostDisplay({
   return (
     <div className="flex flex-col items-center gap-6 select-none">
       {/* Timer */}
-      <div className="font-mono tabular-nums text-slate-400 text-4xl md:text-6xl tracking-wider">
+      <div className="font-mono tabular-nums text-gray-500 dark:text-slate-400 text-4xl md:text-6xl tracking-wider">
         {fmtTime(elapsedSeconds)}
       </div>
 
@@ -36,7 +36,7 @@ export default function CostDisplay({
       <AnimatedCost cost={cost} currency={currency} />
 
       {/* Rate label */}
-      <div className="text-slate-500 text-lg">
+      <div className="text-gray-400 dark:text-slate-500 text-lg">
         {CURRENCY_SYMBOLS[currency]}{" "}
         {formatCost(totalRatePerHour, currency)
           .replace(/MMK|USD|SGD|\$|S\$/g, "")
@@ -76,9 +76,9 @@ function AnimatedCost({
 
   return (
     <div
-      className={`font-mono tabular-nums font-bold text-white leading-none
+      className={`font-mono tabular-nums font-bold text-gray-900 dark:text-white leading-none
         text-5xl sm:text-6xl md:text-7xl lg:text-8xl
-        transition-colors duration-150 ${flash ? "text-amber-400" : ""}`}
+        transition-colors duration-150 ${flash ? "text-amber-500 dark:text-amber-400" : ""}`}
     >
       {display}
     </div>

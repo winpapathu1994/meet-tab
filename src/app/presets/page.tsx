@@ -77,8 +77,8 @@ export default function PresetsPage() {
   // Loading spinner while auth resolves
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -87,16 +87,16 @@ export default function PresetsPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center p-6 pt-8 gap-6">
-      <h1 className="text-3xl font-bold text-white tracking-tight">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col items-center p-6 pt-8 gap-6">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
         Meeting Sessions
       </h1>
 
       <div className="w-full max-w-lg mx-auto space-y-3">
         {fetching ? (
-          <p className="text-slate-500 text-sm text-center py-8">Loading…</p>
+          <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-8">Loading…</p>
         ) : presets.length === 0 ? (
-          <p className="text-slate-500 text-sm text-center py-8">
+          <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-8">
             No saved sessions yet. Create one from the Meet tab.
           </p>
         ) : (
@@ -104,16 +104,16 @@ export default function PresetsPage() {
             {presets.map((p) => (
               <li
                 key={p._id}
-                className="flex items-center justify-between gap-3 py-3 px-1 border-b border-slate-800"
+                className="flex items-center justify-between gap-3 py-3 px-1 border-b border-gray-200 dark:border-slate-800"
               >
                 <button
                   onClick={() => handleLoad(p)}
                   className="flex-1 text-left min-w-0"
                 >
-                  <div className="text-white font-medium truncate">
+                  <div className="text-gray-900 dark:text-white font-medium truncate">
                     {p.name}
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5">
+                  <div className="text-xs text-gray-400 dark:text-slate-500 mt-0.5">
                     {p.attendees.length}{" "}
                     {p.attendees.length === 1 ? "person" : "people"} ·{" "}
                     {new Date(p.createdAt).toLocaleDateString()}
@@ -128,7 +128,7 @@ export default function PresetsPage() {
                   </button>
                   <button
                     onClick={() => handleDelete(p._id)}
-                    className="w-8 h-8 rounded-md text-slate-400 hover:text-red-400 hover:bg-slate-700 transition-colors text-sm"
+                    className="w-8 h-8 rounded-md text-gray-500 hover:text-red-400 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-red-400 dark:hover:bg-slate-700 transition-colors text-sm"
                     aria-label={`Delete ${p.name}`}
                     title="Delete"
                   >

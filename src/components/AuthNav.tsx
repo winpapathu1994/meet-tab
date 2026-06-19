@@ -18,10 +18,10 @@ export default function AuthNav() {
 
   return (
     <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-      <span className="text-slate-400 text-sm px-2">{user.name}</span>
+      <span className="text-gray-500 dark:text-slate-400 text-sm px-2">{user.name}</span>
       <button
         onClick={handleLogout}
-        className="text-sm px-3 py-1.5 rounded-md bg-slate-800 text-slate-400 hover:text-red-400 hover:bg-slate-700 transition-colors"
+        className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:text-red-400 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
       >
         Logout
       </button>

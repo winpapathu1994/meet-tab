@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface Tab {
   label: string;
@@ -30,7 +31,7 @@ export default function NavBar() {
   if (pathname.startsWith("/api-docs") || loading || !user) return null;
 
   return (
-    <nav className="w-full bg-slate-900 border-b border-slate-800">
+    <nav className="w-full bg-gray-50 border-b border-gray-200 dark:bg-slate-900 dark:border-slate-800">
       <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-12">
         {/* Tabs */}
         <div className="flex items-center gap-1">
@@ -42,8 +43,8 @@ export default function NavBar() {
                 href={tab.href}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   active
-                    ? "bg-slate-700 text-white"
-                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                    ? "bg-gray-200 text-gray-900 dark:bg-slate-700 dark:text-white"
+                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800"
                 }`}
               >
                 {tab.label}
@@ -52,15 +53,16 @@ export default function NavBar() {
           })}
         </div>
 
-        {/* User + logout */}
+        {/* User + logout + theme toggle */}
         <div className="flex items-center gap-2">
-          <span className="text-slate-400 text-sm">{user.name}</span>
+          <span className="text-gray-500 dark:text-slate-400 text-sm">{user.name}</span>
           <button
             onClick={handleLogout}
-            className="text-sm px-2 py-1 rounded-md text-slate-500 hover:text-red-400 hover:bg-slate-800 transition-colors"
+            className="text-sm px-2 py-1 rounded-md text-gray-400 hover:text-red-400 hover:bg-gray-100 dark:text-slate-500 dark:hover:text-red-400 dark:hover:bg-slate-800 transition-colors"
           >
             Logout
           </button>
+          <ThemeToggle />
         </div>
       </div>
     </nav>

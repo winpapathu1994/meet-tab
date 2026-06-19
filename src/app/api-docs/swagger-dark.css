@@ -1,8 +1,8 @@
-/* Swagger UI dark theme — matches app bg-slate-900 palette */
+/* Swagger UI theme — light mode default, dark mode via .dark class */
 
 /* ── Layout chrome ───────────────────────────────── */
 .swagger-ui {
-  color: #e2e8f0; /* slate-200 */
+  color: #374151; /* gray-700 */
 }
 
 /* Hide the Swagger topbar entirely */
@@ -16,17 +16,17 @@
 }
 
 .swagger-ui .info .title {
-  color: #f8fafc; /* slate-50 */
+  color: #111827; /* gray-900 */
 }
 
 .swagger-ui .info p,
 .swagger-ui .info li,
 .swagger-ui .info table {
-  color: #cbd5e1; /* slate-300 */
+  color: #4b5563; /* gray-600 */
 }
 
 .swagger-ui .info a {
-  color: #60a5fa; /* blue-400 */
+  color: #2563eb; /* blue-600 */
 }
 
 .swagger-ui .info h1,
@@ -34,76 +34,76 @@
 .swagger-ui .info h3,
 .swagger-ui .info h4,
 .swagger-ui .info h5 {
-  color: #f1f5f9; /* slate-100 */
+  color: #1f2937; /* gray-800 */
 }
 
 /* ── Schemas / models ────────────────────────────── */
 .swagger-ui .scheme-container {
-  background: #1e293b; /* slate-800 */
-  border: 1px solid #334155; /* slate-700 */
+  background: #f9fafb; /* gray-50 */
+  border: 1px solid #e5e7eb; /* gray-200 */
   box-shadow: none;
 }
 
 .swagger-ui section.models {
-  border: 1px solid #334155;
+  border: 1px solid #e5e7eb;
 }
 
 .swagger-ui section.models .model-container {
-  background: #1e293b;
+  background: #f9fafb;
 }
 
 .swagger-ui section.models.is-open h4 {
-  border-bottom-color: #334155;
+  border-bottom-color: #e5e7eb;
 }
 
 .swagger-ui .model-title {
-  color: #f1f5f9;
+  color: #1f2937;
 }
 
 .swagger-ui .model {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .model-toggle {
-  filter: invert(0.8);
+  filter: invert(0.4);
 }
 
 .swagger-ui .model-box {
-  background: #0f172a;
+  background: #ffffff;
 }
 
 .swagger-ui table.model tr td {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui table.model tr td:first-of-type {
-  color: #94a3b8; /* slate-400 */
+  color: #6b7280; /* gray-500 */
 }
 
 .swagger-ui .prop-type {
-  color: #7dd3fc; /* sky-300 */
+  color: #0369a1; /* sky-700 */
 }
 
 .swagger-ui .prop-format {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 /* ── Opblock / endpoint cards ────────────────────── */
 .swagger-ui .opblock-tag {
-  color: #f1f5f9;
-  border-bottom-color: #334155;
+  color: #1f2937;
+  border-bottom-color: #e5e7eb;
 }
 
 .swagger-ui .opblock-tag small {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui .opblock-tag:hover {
-  background: #1e293b;
+  background: #f9fafb;
 }
 
 .swagger-ui .opblock {
-  border: 1px solid #334155;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: none;
   margin-bottom: 12px;
@@ -114,16 +114,16 @@
 }
 
 .swagger-ui .opblock .opblock-summary-description {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .opblock .opblock-summary-path {
-  color: #f1f5f9;
+  color: #1f2937;
 }
 
 .swagger-ui .opblock.opblock-get {
-  background: rgba(59, 130, 246, 0.08); /* blue-500/8 */
-  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.06);
+  border-color: rgba(59, 130, 246, 0.25);
 }
 
 .swagger-ui .opblock.opblock-get .opblock-summary-method {
@@ -131,8 +131,8 @@
 }
 
 .swagger-ui .opblock.opblock-post {
-  background: rgba(34, 197, 94, 0.08); /* green-500/8 */
-  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.06);
+  border-color: rgba(34, 197, 94, 0.25);
 }
 
 .swagger-ui .opblock.opblock-post .opblock-summary-method {
@@ -140,8 +140,8 @@
 }
 
 .swagger-ui .opblock.opblock-put {
-  background: rgba(245, 158, 11, 0.08); /* amber-500/8 */
-  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.06);
+  border-color: rgba(245, 158, 11, 0.25);
 }
 
 .swagger-ui .opblock.opblock-put .opblock-summary-method {
@@ -149,8 +149,8 @@
 }
 
 .swagger-ui .opblock.opblock-delete {
-  background: rgba(239, 68, 68, 0.08); /* red-500/8 */
-  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.25);
 }
 
 .swagger-ui .opblock.opblock-delete .opblock-summary-method {
@@ -169,54 +169,54 @@
 
 /* ── Opblock body (expanded) ─────────────────────── */
 .swagger-ui .opblock-body {
-  background: #0f172a;
+  background: #ffffff;
 }
 
 .swagger-ui .opblock-body pre {
-  background: #020617; /* slate-950 */
-  color: #e2e8f0;
+  background: #f9fafb;
+  color: #374151;
 }
 
 .swagger-ui .opblock-section-header {
-  background: #1e293b;
-  border-color: #334155;
+  background: #f9fafb;
+  border-color: #e5e7eb;
 }
 
 .swagger-ui .opblock-section-header h4 {
-  color: #f1f5f9;
+  color: #1f2937;
 }
 
 .swagger-ui .opblock-section-header label {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui .tab li button.tablinks {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui .tab li button.tablinks.active {
-  color: #f1f5f9;
+  color: #1f2937;
   border-bottom-color: #3b82f6;
 }
 
 /* ── Parameters / table rows ─────────────────────── */
 .swagger-ui .parameters-col_description,
 .swagger-ui .parameter__name {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui .parameter__type {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui table thead tr td,
 .swagger-ui table thead tr th {
-  color: #94a3b8;
-  border-bottom-color: #334155;
+  color: #6b7280;
+  border-bottom-color: #e5e7eb;
 }
 
 .swagger-ui table tbody tr td {
-  border-bottom-color: #1e293b;
+  border-bottom-color: #f3f4f6;
 }
 
 .swagger-ui .parameter__name.required::after {
@@ -230,45 +230,45 @@
 /* ── Response area ───────────────────────────────── */
 .swagger-ui .responses-inner h4,
 .swagger-ui .responses-inner h5 {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .response-col_status {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui .response-col_description {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .response-col_links {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui .responses-table .response-col_status {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui table.responses-table tbody tr td {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .response-controls {
-  border-bottom-color: #334155;
+  border-bottom-color: #e5e7eb;
 }
 
 /* ── Buttons ─────────────────────────────────────── */
 .swagger-ui .btn {
   border-radius: 6px;
   font-weight: 500;
-  border: 1px solid #334155;
-  color: #e2e8f0;
-  background: #1e293b;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  background: #ffffff;
   box-shadow: none;
 }
 
 .swagger-ui .btn:hover {
-  background: #334155;
+  background: #f3f4f6;
 }
 
 .swagger-ui .btn.authorize {
@@ -307,7 +307,7 @@
 }
 
 .swagger-ui .btn-group .btn + .btn {
-  border-left-color: #475569;
+  border-left-color: #9ca3af;
 }
 
 /* ── Inputs / selects / textareas ────────────────── */
@@ -317,10 +317,10 @@
 .swagger-ui input[type="number"],
 .swagger-ui textarea,
 .swagger-ui select {
-  background: #0f172a;
-  border: 1px solid #475569;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
-  color: #e2e8f0;
+  color: #374151;
   padding: 6px 10px;
 }
 
@@ -333,50 +333,50 @@
 }
 
 .swagger-ui select {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui textarea {
-  color: #e2e8f0;
+  color: #374151;
   font-family: "SF Mono", "Fira Code", monospace;
   font-size: 13px;
 }
 
 /* ── Modals / dialogs ────────────────────────────── */
 .swagger-ui .dialog-ux .modal-ux {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
 }
 
 .swagger-ui .dialog-ux .modal-ux-header {
-  border-bottom-color: #334155;
+  border-bottom-color: #e5e7eb;
 }
 
 .swagger-ui .dialog-ux .modal-ux-header h3 {
-  color: #f1f5f9;
+  color: #1f2937;
 }
 
 .swagger-ui .dialog-ux .modal-ux-content {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .dialog-ux .modal-ux-content p {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 /* ── Auth modal ──────────────────────────────────── */
 .swagger-ui .auth-btn-wrapper {
-  border-top-color: #334155;
+  border-top-color: #e5e7eb;
 }
 
 .swagger-ui .auth-container .wrapper {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 /* ── Expand / collapse arrows ────────────────────── */
 .swagger-ui .expand-operation,
 .swagger-ui .opblock-control-arrow {
-  filter: invert(0.7);
+  filter: invert(0.4);
 }
 
 /* ── Markdown / descriptions ─────────────────────── */
@@ -384,59 +384,59 @@
 .swagger-ui .markdown li,
 .swagger-ui .renderedMarkdown p,
 .swagger-ui .renderedMarkdown li {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .markdown code,
 .swagger-ui .renderedMarkdown code {
-  background: #334155;
-  color: #f1f5f9;
+  background: #f3f4f6;
+  color: #1f2937;
   border-radius: 3px;
   padding: 1px 4px;
 }
 
 .swagger-ui .markdown pre,
 .swagger-ui .renderedMarkdown pre {
-  background: #020617;
+  background: #f9fafb;
 }
 
 /* ── Loading / errors ────────────────────────────── */
 .swagger-ui .loading-container {
-  background: #0f172a;
+  background: #ffffff;
 }
 
 .swagger-ui .loading-container .loading::after {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 .swagger-ui .errors-wrapper {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 6px;
 }
 
 /* ── Versions / servers select ───────────────────── */
 .swagger-ui .servers label,
 .swagger-ui .servers > label {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .info .base-url {
-  color: #94a3b8;
+  color: #6b7280;
 }
 
 /* ── Misc ────────────────────────────────────────── */
 .swagger-ui .no-margin {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui .response-control-media-type {
-  color: #cbd5e1;
+  color: #4b5563;
 }
 
 .swagger-ui .response-control-media-type--accept-controller select {
-  border-color: #475569;
-  color: #e2e8f0;
+  border-color: #d1d5db;
+  color: #374151;
 }
 
 /* Copy button and other small icons */
@@ -445,21 +445,317 @@
 }
 
 .swagger-ui .copy-to-clipboard {
-  filter: invert(0.6);
+  filter: invert(0.4);
 }
 
 /* Try it out response status colors */
 .swagger-ui .response .response-col_status {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 /* Live response area */
 .swagger-ui .live-responses-table .response-col_status {
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .swagger-ui .microlight {
+  background: #f9fafb !important;
+  color: #374151 !important;
+  font-family: "SF Mono", "Fira Code", monospace !important;
+}
+
+/* =================================================== */
+/* ── DARK MODE OVERRIDES ─────────────────────────── */
+/* =================================================== */
+
+.dark .swagger-ui {
+  color: #e2e8f0;
+}
+
+/* Info */
+.dark .swagger-ui .info .title {
+  color: #f8fafc;
+}
+.dark .swagger-ui .info p,
+.dark .swagger-ui .info li,
+.dark .swagger-ui .info table {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .info a {
+  color: #60a5fa;
+}
+.dark .swagger-ui .info h1,
+.dark .swagger-ui .info h2,
+.dark .swagger-ui .info h3,
+.dark .swagger-ui .info h4,
+.dark .swagger-ui .info h5 {
+  color: #f1f5f9;
+}
+
+/* Schemas / models */
+.dark .swagger-ui .scheme-container {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .swagger-ui section.models {
+  border-color: #334155;
+}
+.dark .swagger-ui section.models .model-container {
+  background: #1e293b;
+}
+.dark .swagger-ui section.models.is-open h4 {
+  border-bottom-color: #334155;
+}
+.dark .swagger-ui .model-title {
+  color: #f1f5f9;
+}
+.dark .swagger-ui .model {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .model-toggle {
+  filter: invert(0.8);
+}
+.dark .swagger-ui .model-box {
+  background: #0f172a;
+}
+.dark .swagger-ui table.model tr td {
+  color: #cbd5e1;
+}
+.dark .swagger-ui table.model tr td:first-of-type {
+  color: #94a3b8;
+}
+.dark .swagger-ui .prop-type {
+  color: #7dd3fc;
+}
+.dark .swagger-ui .prop-format {
+  color: #94a3b8;
+}
+
+/* Opblock / endpoint cards */
+.dark .swagger-ui .opblock-tag {
+  color: #f1f5f9;
+  border-bottom-color: #334155;
+}
+.dark .swagger-ui .opblock-tag small {
+  color: #94a3b8;
+}
+.dark .swagger-ui .opblock-tag:hover {
+  background: #1e293b;
+}
+.dark .swagger-ui .opblock {
+  border-color: #334155;
+}
+.dark .swagger-ui .opblock .opblock-summary-description {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .opblock .opblock-summary-path {
+  color: #f1f5f9;
+}
+.dark .swagger-ui .opblock.opblock-get {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.dark .swagger-ui .opblock.opblock-post {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+.dark .swagger-ui .opblock.opblock-put {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.dark .swagger-ui .opblock.opblock-delete {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Opblock body */
+.dark .swagger-ui .opblock-body {
+  background: #0f172a;
+}
+.dark .swagger-ui .opblock-body pre {
+  background: #020617;
+  color: #e2e8f0;
+}
+.dark .swagger-ui .opblock-section-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .swagger-ui .opblock-section-header h4 {
+  color: #f1f5f9;
+}
+.dark .swagger-ui .opblock-section-header label {
+  color: #94a3b8;
+}
+.dark .swagger-ui .tab li button.tablinks {
+  color: #94a3b8;
+}
+.dark .swagger-ui .tab li button.tablinks.active {
+  color: #f1f5f9;
+}
+
+/* Parameters */
+.dark .swagger-ui .parameters-col_description,
+.dark .swagger-ui .parameter__name {
+  color: #e2e8f0;
+}
+.dark .swagger-ui .parameter__type {
+  color: #94a3b8;
+}
+.dark .swagger-ui table thead tr td,
+.dark .swagger-ui table thead tr th {
+  color: #94a3b8;
+  border-bottom-color: #334155;
+}
+.dark .swagger-ui table tbody tr td {
+  border-bottom-color: #1e293b;
+}
+
+/* Response area */
+.dark .swagger-ui .responses-inner h4,
+.dark .swagger-ui .responses-inner h5 {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .response-col_status {
+  color: #e2e8f0;
+}
+.dark .swagger-ui .response-col_description {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .response-col_links {
+  color: #94a3b8;
+}
+.dark .swagger-ui .responses-table .response-col_status {
+  color: #e2e8f0;
+}
+.dark .swagger-ui table.responses-table tbody tr td {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .response-controls {
+  border-bottom-color: #334155;
+}
+
+/* Buttons */
+.dark .swagger-ui .btn {
+  border-color: #334155;
+  color: #e2e8f0;
+  background: #1e293b;
+}
+.dark .swagger-ui .btn:hover {
+  background: #334155;
+}
+.dark .swagger-ui .btn-group .btn + .btn {
+  border-left-color: #475569;
+}
+
+/* Inputs */
+.dark .swagger-ui input[type="text"],
+.dark .swagger-ui input[type="email"],
+.dark .swagger-ui input[type="password"],
+.dark .swagger-ui input[type="number"],
+.dark .swagger-ui textarea,
+.dark .swagger-ui select {
+  background: #0f172a;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+.dark .swagger-ui select {
+  color: #e2e8f0;
+}
+.dark .swagger-ui textarea {
+  color: #e2e8f0;
+}
+
+/* Modals */
+.dark .swagger-ui .dialog-ux .modal-ux {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .swagger-ui .dialog-ux .modal-ux-header {
+  border-bottom-color: #334155;
+}
+.dark .swagger-ui .dialog-ux .modal-ux-header h3 {
+  color: #f1f5f9;
+}
+.dark .swagger-ui .dialog-ux .modal-ux-content {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .dialog-ux .modal-ux-content p {
+  color: #cbd5e1;
+}
+
+/* Auth */
+.dark .swagger-ui .auth-btn-wrapper {
+  border-top-color: #334155;
+}
+.dark .swagger-ui .auth-container .wrapper {
+  color: #e2e8f0;
+}
+
+/* Expand arrows */
+.dark .swagger-ui .expand-operation,
+.dark .swagger-ui .opblock-control-arrow {
+  filter: invert(0.7);
+}
+
+/* Markdown */
+.dark .swagger-ui .markdown p,
+.dark .swagger-ui .markdown li,
+.dark .swagger-ui .renderedMarkdown p,
+.dark .swagger-ui .renderedMarkdown li {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .markdown code,
+.dark .swagger-ui .renderedMarkdown code {
+  background: #334155;
+  color: #f1f5f9;
+}
+.dark .swagger-ui .markdown pre,
+.dark .swagger-ui .renderedMarkdown pre {
+  background: #020617;
+}
+
+/* Loading / errors */
+.dark .swagger-ui .loading-container {
+  background: #0f172a;
+}
+.dark .swagger-ui .loading-container .loading::after {
+  color: #94a3b8;
+}
+.dark .swagger-ui .errors-wrapper {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Servers */
+.dark .swagger-ui .servers label,
+.dark .swagger-ui .servers > label {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .info .base-url {
+  color: #94a3b8;
+}
+
+/* Misc */
+.dark .swagger-ui .no-margin {
+  color: #e2e8f0;
+}
+.dark .swagger-ui .response-control-media-type {
+  color: #cbd5e1;
+}
+.dark .swagger-ui .response-control-media-type--accept-controller select {
+  border-color: #475569;
+  color: #e2e8f0;
+}
+.dark .swagger-ui .copy-to-clipboard {
+  filter: invert(0.6);
+}
+.dark .swagger-ui .response .response-col_status {
+  color: #e2e8f0;
+}
+.dark .swagger-ui .live-responses-table .response-col_status {
+  color: #e2e8f0;
+}
+.dark .swagger-ui .microlight {
   background: #020617 !important;
   color: #e2e8f0 !important;
-  font-family: "SF Mono", "Fira Code", monospace !important;
 }

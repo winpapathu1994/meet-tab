@@ -66,8 +66,8 @@ export default function MeetPage() {
   // Loading spinner while auth resolves
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -78,7 +78,7 @@ export default function MeetPage() {
   const isIdle = state === "idle";
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
       {/* Currency toggle — always visible */}
       {isIdle && (
         <CurrencyToggle currency={currency} onChange={setCurrency} />
@@ -88,11 +88,11 @@ export default function MeetPage() {
         /* ── Setup view ── */
         <div className="flex flex-col items-center gap-8 w-full">
           <div className="flex flex-col items-center gap-1">
-            <h1 className="text-3xl font-bold text-white tracking-tight">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
               MeetTab
             </h1>
             {sessionName && (
-              <p className="text-sm text-slate-400">{sessionName}</p>
+              <p className="text-sm text-gray-500 dark:text-slate-400">{sessionName}</p>
             )}
           </div>
           <AttendeeManager
@@ -123,7 +123,7 @@ export default function MeetPage() {
         /* ── Projector / meeting view ── */
         <div className="flex flex-col items-center gap-10 w-full max-w-4xl">
           {sessionName && (
-            <p className="text-sm text-slate-500">{sessionName}</p>
+            <p className="text-sm text-gray-400 dark:text-slate-500">{sessionName}</p>
           )}
           <CurrencyToggle currency={currency} onChange={setCurrency} />
           <CostDisplay

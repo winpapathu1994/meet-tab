@@ -25,8 +25,8 @@ export default function RegisterPage() {
   // Show spinner while checking session
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -50,51 +50,51 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
-      <Link href="/" className="text-slate-500 hover:text-white transition-colors text-sm">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
+      <Link href="/" className="text-gray-400 hover:text-gray-900 dark:text-slate-500 dark:hover:text-white transition-colors text-sm">
         ← Back
       </Link>
 
-      <h1 className="text-3xl font-bold text-white">Register</h1>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Register</h1>
 
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm space-y-4"
       >
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Name</label>
+          <label className="block text-sm text-gray-500 dark:text-slate-400 mb-1">Name</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
             autoFocus
-            className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
             placeholder="your name"
           />
         </div>
 
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Email</label>
+          <label className="block text-sm text-gray-500 dark:text-slate-400 mb-1">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
             placeholder="you@example.com"
           />
         </div>
 
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Password</label>
+          <label className="block text-sm text-gray-500 dark:text-slate-400 mb-1">Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
             placeholder="At least 6 characters"
           />
         </div>
@@ -103,9 +103,9 @@ export default function RegisterPage() {
           <div className="text-sm">
             <p className="text-red-400">{error}</p>
             {errorCode === "email_exists" && (
-              <p className="text-slate-400 mt-1">
+              <p className="text-gray-500 dark:text-slate-400 mt-1">
                 Already have an account?{" "}
-                <Link href="/" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">
+                <Link href="/" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 underline underline-offset-2">
                   Login here
                 </Link>
               </p>
@@ -116,14 +116,14 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={busy}
-          className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-semibold transition-colors"
+          className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white font-semibold transition-colors"
         >
           {busy ? "Creating account…" : "Register"}
         </button>
 
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-gray-400 dark:text-slate-500">
           Already have an account?{" "}
-          <Link href="/" className="text-emerald-400 hover:text-emerald-300">
+          <Link href="/" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300">
             Login
           </Link>
         </p>
