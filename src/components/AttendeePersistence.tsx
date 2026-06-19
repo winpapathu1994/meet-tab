@@ -7,7 +7,7 @@ import ConfirmDialog from "@/components/ConfirmDialog";
 
 interface Props {
   attendees: Attendee[];
-  onLoad: (entries: { name: string; roleId: string }[]) => void;
+  onLoad: (entries: { name: string; roleId: string; hourlyRate: number }[]) => void;
 }
 
 export default function AttendeePersistence({ attendees, onLoad }: Props) {
@@ -46,7 +46,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
   const handleSave = useCallback(async () => {
     setSaving(true);
     try {
-      const entries = attendees.map((a) => ({ name: a.name, roleId: a.roleId }));
+      const entries = attendees.map((a) => ({ name: a.name, roleId: a.roleId, hourlyRate: a.hourlyRate }));
       const res = await fetch("/api/attendees", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

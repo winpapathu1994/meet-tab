@@ -8,7 +8,7 @@ import type { Attendee } from "../types/attendee";
 interface Props {
   attendees: Attendee[];
   currency: Currency;
-  onAdd: (name: string, roleId: string) => void;
+  onAdd: (name: string, roleId: string, hourlyRate?: number) => void;
   onUpdate: (
     id: string,
     updates: Partial<Pick<Attendee, "name" | "roleId">>,
@@ -25,8 +25,17 @@ export default function AttendeeManager({
 }: Props) {
   const { roles: apiRoles } = useRoles();
 
-  /** Look up role label + rate by id. Matches MongoDB _id first, then static short id, then fallback. */
-  function roleInfo(roleId: string): { label: string; hourlyRate: number } {
+  /** Look up role label + rate by id, using stored hourlyRate first, then fall back to role lookup. */
+  function roleInfo(roleId: string, storedRate?: number): { label: string; hourlyRate: number } {
+    // Use stored rate if available (from saved session / preset)
+    if (storedRate !== undefined && storedRate > 0) {
+      // Still look up label from roles
+      const api = apiRoles.find((r) => r._id === roleId);
+      if (api) return { label: api.label, hourlyRate: storedRate };
+      const st = ROLES.find((r) => r.id === roleId);
+      if (st) return { label: st.label, hourlyRate: storedRate };
+      return { label: roleId, hourlyRate: storedRate };
+    }
     // Try API roles by _id (MongoDB ObjectId)
     const api = apiRoles.find((r) => r._id === roleId);
     if (api) return { label: api.label, hourlyRate: api.hourlyRate };
@@ -50,7 +59,7 @@ export default function AttendeeManager({
   const [confirmDelete, setConfirmDelete] = useState<Attendee | null>(null);
 
   const totalRate = attendees.reduce(
-    (sum, a) => sum + roleInfo(a.roleId).hourlyRate,
+    (sum, a) => sum + roleInfo(a.roleId, a.hourlyRate).hourlyRate,
     0,
   );
 
@@ -78,7 +87,8 @@ export default function AttendeeManager({
     if (!trimmed) return;
 
     if (adding) {
-      onAdd(trimmed, formRole);
+      const rate = roleInfo(formRole).hourlyRate;
+      onAdd(trimmed, formRole, rate);
       setAdding(false);
     } else if (editingId !== null) {
       onUpdate(editingId, { name: trimmed, roleId: formRole });
@@ -160,8 +170,8 @@ export default function AttendeeManager({
                     )}
                   </div>
                   <div className="text-sm text-gray-500 dark:text-slate-400">
-                    {roleInfo(a.roleId).label} · {sym}{" "}
-                    {fmtRate(roleInfo(a.roleId).hourlyRate)}/hr
+                    {roleInfo(a.roleId, a.hourlyRate).label} · {sym}{" "}
+                    {fmtRate(roleInfo(a.roleId, a.hourlyRate).hourlyRate)}/hr
                   </div>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
