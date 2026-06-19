@@ -108,17 +108,28 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
   const hasAttendees = attendees.length > 0;
 
   return (
-    <div className="w-full max-w-lg mx-auto space-y-2">
+    <div className="space-y-2">
       {/* Toast */}
       {message && (
-        <div
-          className={`text-center text-sm ${
-            message.kind === "success"
-              ? "text-accent"
-              : "text-danger dark:text-red-400"
-          }`}
-        >
-          {message.text}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-bounce-in">
+          <div
+            className={`flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${
+              message.kind === "success"
+                ? "bg-accent shadow-accent/25"
+                : "bg-danger shadow-danger/25"
+            }`}
+          >
+            {message.kind === "success" ? (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
+            {message.text}
+          </div>
         </div>
       )}
 
@@ -135,31 +146,54 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         onCancel={() => setConfirmClear(false)}
       />
 
-      {/* Buttons row */}
+      {/* Pill-style button row */}
       <div className="flex gap-2 justify-center">
         <button
           onClick={handleSave}
           disabled={saving || !hasAttendees}
-          className="px-4 py-2 rounded-md bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 hover:text-primary dark:hover:text-primary text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
           title={hasAttendees ? "Save attendees to database" : "No attendees to save"}
         >
-          {saving ? "…" : "💾 Save"}
+          {saving ? (
+            <div className="w-4 h-4 border-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+          ) : (
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+          )}
+          {saving ? "Saving…" : "Save"}
         </button>
+
         <button
           onClick={handleLoad}
           disabled={loading || !hasSavedData}
-          className="px-4 py-2 rounded-md bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 hover:text-primary dark:hover:text-primary text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
           title={hasSavedData ? "Load saved attendees" : "No saved data"}
         >
-          {loading ? "…" : "📂 Load"}
+          {loading ? (
+            <div className="w-4 h-4 border-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+          ) : (
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          )}
+          {loading ? "Loading…" : "Load"}
         </button>
+
         <button
           onClick={() => setConfirmClear(true)}
           disabled={clearing || !hasSavedData}
-          className="px-4 py-2 rounded-md bg-danger hover:bg-danger-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-danger/40 dark:hover:border-danger/40 hover:text-danger dark:hover:text-danger text-gray-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
           title={hasSavedData ? "Delete saved data" : "Nothing to clear"}
         >
-          {clearing ? "…" : "🗑️ Clear"}
+          {clearing ? (
+            <div className="w-4 h-4 border-2 border-gray-300 border-t-danger rounded-full animate-spin" />
+          ) : (
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          )}
+          {clearing ? "Clearing…" : "Clear"}
         </button>
       </div>
     </div>

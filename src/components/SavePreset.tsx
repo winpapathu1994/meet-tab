@@ -52,11 +52,16 @@ export default function SavePreset({ attendees }: Props) {
   const hasAttendees = attendees.length > 0;
 
   return (
-    <div className="w-full max-w-lg mx-auto space-y-2">
+    <div className="space-y-2">
       {/* Success toast */}
       {ok && (
-        <div className="text-center text-sm text-accent animate-pulse">
-          {ok}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-bounce-in">
+          <div className="flex items-center gap-3 bg-accent text-white px-5 py-3 rounded-xl shadow-lg shadow-accent/25">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="font-medium text-sm">{ok}</span>
+          </div>
         </div>
       )}
 
@@ -65,12 +70,21 @@ export default function SavePreset({ attendees }: Props) {
         <button
           onClick={() => setOpen(true)}
           disabled={!hasAttendees}
-          className="w-full py-2 rounded-lg border border-dashed border-gray-300 dark:border-slate-600 text-gray-500 dark:text-slate-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+          className="w-full py-3 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/40 dark:hover:text-primary dark:hover:border-primary/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium flex items-center justify-center gap-2 group"
         >
-          💾 Save Session
+          <svg
+            className="h-4 w-4 transition-transform group-hover:scale-110"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+          </svg>
+          Save as Preset
         </button>
       ) : (
-        <div className="flex gap-2">
+        <div className="flex gap-2 p-1 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
           <input
             autoFocus
             type="text"
@@ -83,29 +97,38 @@ export default function SavePreset({ attendees }: Props) {
                 setName("");
               }
             }}
-            placeholder="e.g., Sprint Planning"
-            className="flex-1 px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
+            placeholder="Preset name (e.g. Sprint Planning)"
+            className="flex-1 px-3 py-2 bg-transparent text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none"
           />
           <button
             onClick={handleSave}
             disabled={!name.trim() || saving || !hasAttendees}
-            className="px-4 py-2 rounded-md bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center gap-1.5"
           >
-            {saving ? "…" : "Save"}
+            {saving ? (
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+            {saving ? "Saving" : "Save"}
           </button>
           <button
             onClick={() => {
               setOpen(false);
               setName("");
             }}
-            className="px-3 py-2 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
+            className="px-3 py-2 rounded-lg text-sm font-medium text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 transition-colors"
           >
             Cancel
           </button>
         </div>
       )}
 
-      {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
+      {error && (
+        <p className="text-danger text-xs text-center">{error}</p>
+      )}
     </div>
   );
 }

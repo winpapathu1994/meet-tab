@@ -139,7 +139,7 @@ export default function UserMenu() {
       {/* Trigger pill */}
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-2 px-2 py-1 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 transition-colors"
+        className="flex items-center gap-2 px-2 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 transition-colors"
       >
         {avatarUrl ? (
           <img
@@ -152,7 +152,7 @@ export default function UserMenu() {
             {user.name?.charAt(0).toUpperCase() ?? "?"}
           </div>
         )}
-        <span className="text-[#e5e7eb] text-sm font-medium hidden sm:inline">
+        <span className="text-slate-700 dark:text-slate-200 text-sm font-medium hidden sm:inline">
           {user.name}
         </span>
       </button>
@@ -166,13 +166,13 @@ export default function UserMenu() {
             onClick={() => setOpen(false)}
           />
 
-          <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-h-[90vh] overflow-y-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 sm:inset-x-auto sm:translate-y-0 sm:max-h-none sm:overflow-y-visible sm:w-80 z-50 rounded-xl bg-[#1e293b] border border-white/10 shadow-2xl p-5">
+          <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-h-[90vh] overflow-y-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 sm:inset-x-auto sm:translate-y-0 sm:max-h-none sm:overflow-y-visible sm:w-80 z-50 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl p-5">
             {/* Header with close button */}
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-semibold text-base">Profile Settings</h3>
+              <h3 className="text-slate-900 dark:text-white font-semibold text-base">Profile Settings</h3>
               <button
                 onClick={() => setOpen(false)}
-                className="sm:hidden p-1 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                className="sm:hidden p-1 rounded-md text-slate-400 dark:text-slate-500 hover:text-slate-600 hover:bg-slate-100 dark:hover:text-slate-300 dark:hover:bg-white/5 transition-colors"
                 aria-label="Close"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -219,12 +219,12 @@ export default function UserMenu() {
                     setAvatarPreview(null);
                     if (fileRef.current) fileRef.current.value = "";
                   }}
-                  className="text-xs text-gray-400 hover:text-danger transition-colors ml-2"
+                  className="text-xs text-slate-400 dark:text-slate-500 hover:text-danger transition-colors ml-2"
                 >
                   Remove
                 </button>
               )}
-              <p className="text-xs text-gray-400 mt-0.5">PNG, JPEG, WebP · max 2 MB</p>
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">PNG, JPEG, WebP · max 2 MB</p>
             </div>
             <input
               ref={fileRef}
@@ -237,12 +237,12 @@ export default function UserMenu() {
 
           {/* Name field */}
           <label className="block mb-3">
-            <span className="text-xs text-gray-400 mb-1 block">Name</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 mb-1 block">Name</span>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+              className="w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
             />
           </label>
 
@@ -264,27 +264,27 @@ export default function UserMenu() {
           </button>
 
           {showPassword && (
-            <div className="space-y-2 mb-3 pl-4 border-l-2 border-slate-700">
+            <div className="space-y-2 mb-3 pl-4 border-l-2 border-slate-200 dark:border-slate-700">
               <input
                 type="password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="Current password"
-                className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="New password (min 6 chars)"
-                className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm new password"
-                className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
               />
               {newPassword && confirmPassword && newPassword !== confirmPassword && (
                 <p className="text-red-400 text-xs">Passwords do not match</p>
@@ -293,7 +293,7 @@ export default function UserMenu() {
           )}
 
           {/* Messages */}
-          {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+          {error && <p className="text-red-500 dark:text-red-400 text-sm mb-3">{error}</p>}
           {success && <p className="text-accent text-sm mb-3">{success}</p>}
 
           {/* Actions */}
