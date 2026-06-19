@@ -96,7 +96,7 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
         type="button"
         onClick={() => setOpen(!open)}
         onKeyDown={handleKeyDown}
-        className="w-full h-[42px] flex items-center gap-2.5 px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-left text-sm transition-colors focus:outline-none focus:border-emerald-500"
+        className="w-full h-[42px] flex items-center gap-2.5 px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-left text-sm transition-colors focus:outline-none focus:border-primary"
         aria-haspopup="listbox"
         aria-expanded={open}
       >
@@ -152,7 +152,7 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
                   {fmtRate(r.hourlyRate)}/hr
                 </span>
                 {isSel && (
-                  <svg className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 )}

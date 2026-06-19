@@ -92,7 +92,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
     <div className="w-full max-w-lg mx-auto space-y-3">
       {/* Success toast */}
       {successMsg && (
-        <div className="text-center text-sm text-emerald-600 dark:text-emerald-400 animate-pulse">
+        <div className="text-center text-sm text-accent animate-pulse">
           {successMsg}
         </div>
       )}
@@ -118,18 +118,18 @@ export default function PresetManager({ attendees, onLoad }: Props) {
               if (e.key === "Escape") setShowSave(false);
             }}
             placeholder="e.g., Sprint Planning"
-            className="flex-1 px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="flex-1 px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
           />
           <button
             onClick={handleSave}
             disabled={!presetName.trim() || saving}
-            className="px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded-md bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
           >
             {saving ? "…" : "Save"}
           </button>
           <button
             onClick={() => setShowSave(false)}
-            className="px-3 py-2 rounded-md text-sm text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+            className="px-3 py-2 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
           >
             Cancel
           </button>
@@ -165,7 +165,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
                 </button>
                 <button
                   onClick={() => handleDelete(p._id)}
-                  className="text-gray-300 hover:text-red-400 dark:text-slate-600 dark:hover:text-red-400 text-xs px-1 transition-colors"
+                  className="text-gray-300 hover:text-danger dark:text-slate-600 dark:hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 text-xs px-1 transition-colors"
                   title="Delete preset"
                 >
                   🗑️

@@ -25,7 +25,7 @@ export default function LoginPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoFocus
-            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
             placeholder="you@example.com"
           />
         </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary"
             placeholder="••••••"
           />
         </div>
@@ -87,7 +87,7 @@ export default function LoginPage() {
             {errorCode === "email_not_found" && (
               <p className="text-gray-500 dark:text-slate-400 mt-1">
                 {`Don't have an account? `}
-                <Link href="/register" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 underline underline-offset-2">
+                <Link href="/register" className="text-primary hover:text-primary-hover underline underline-offset-2">
                   Register here
                 </Link>
               </p>
@@ -98,14 +98,14 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={busy}
-          className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white font-semibold transition-colors"
+          className="w-full py-2.5 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
         >
           {busy ? "Logging in…" : "Login"}
         </button>
 
         <p className="text-center text-sm text-gray-400 dark:text-slate-500">
           Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300">
+          <Link href="/register" className="text-primary hover:text-primary-hover">
             Register
           </Link>
         </p>

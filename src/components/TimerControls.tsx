@@ -34,7 +34,7 @@ export default function TimerControls({
         <button
           onClick={onStart}
           disabled={!hasRoles}
-          className="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white font-semibold text-lg transition-colors"
+          className="px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-lg transition-colors"
         >
           Start Meeting
         </button>
@@ -43,7 +43,7 @@ export default function TimerControls({
       {state === "running" && (
         <button
           onClick={onPause}
-          className="px-6 py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-lg transition-colors"
+          className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500/50 text-white font-semibold text-lg transition-colors"
         >
           Pause
         </button>
@@ -53,13 +53,13 @@ export default function TimerControls({
         <>
           <button
             onClick={onResume}
-            className="px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-lg transition-colors"
+            className="px-6 py-3 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 text-white font-semibold text-lg transition-colors"
           >
             Resume
           </button>
           <button
             onClick={onReset}
-            className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-slate-600 dark:hover:bg-slate-500 text-gray-900 dark:text-white font-semibold text-lg transition-colors"
+            className="px-6 py-3 rounded-lg bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white font-semibold text-lg transition-colors"
           >
             Reset
           </button>
@@ -69,10 +69,10 @@ export default function TimerControls({
       {state !== "idle" && (
         <button
           onClick={handleCopy}
-          className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+          className={`px-4 py-3 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
             copied
-              ? "bg-emerald-600 text-white"
-              : "bg-gray-100 hover:bg-gray-200 text-gray-600 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-300"
+              ? "bg-accent hover:bg-accent-hover focus-visible:ring-accent/50 text-white"
+              : "bg-secondary hover:bg-secondary-hover focus-visible:ring-secondary/50 text-white"
           }`}
           title="Copy shareable link"
         >
