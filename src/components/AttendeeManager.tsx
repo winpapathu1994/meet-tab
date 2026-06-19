@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRoles } from "@/hooks/useRoles";
 import { ROLES, convertCurrency, CURRENCY_SYMBOLS, type Currency } from "@/data/roles";
 import RoleSelect from "@/components/RoleSelect";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import type { Attendee } from "../types/attendee";
 
 interface Props {
@@ -46,6 +47,7 @@ export default function AttendeeManager({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formName, setFormName] = useState("");
   const [formRole, setFormRole] = useState(apiRoles[0]?._id ?? "");
+  const [confirmDelete, setConfirmDelete] = useState<Attendee | null>(null);
 
   const totalRate = attendees.reduce(
     (sum, a) => sum + roleInfo(a.roleId).hourlyRate,
@@ -172,7 +174,7 @@ export default function AttendeeManager({
                     ✏️
                   </button>
                   <button
-                    onClick={() => onDelete(a.id)}
+                    onClick={() => setConfirmDelete(a)}
                     className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
                     aria-label={`Remove ${a.name || "unnamed attendee"}`}
                     title="Remove"
@@ -245,6 +247,19 @@ export default function AttendeeManager({
           </span>
         </div>
       )}
+
+      {/* ── Confirm delete dialog ── */}
+      <ConfirmDialog
+        open={confirmDelete !== null}
+        title="Remove Attendee"
+        message={`Remove "${confirmDelete?.name || "unnamed attendee"}" from the meeting?`}
+        confirmLabel="Remove"
+        onConfirm={() => {
+          if (confirmDelete) onDelete(confirmDelete.id);
+          setConfirmDelete(null);
+        }}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </div>
   );
 }

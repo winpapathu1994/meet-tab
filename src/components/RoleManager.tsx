@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRoles, type RoleData } from "@/hooks/useRoles";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 export default function RoleManager() {
   const { user } = useAuth();
@@ -14,6 +15,7 @@ export default function RoleManager() {
   const [formRate, setFormRate] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState<RoleData | null>(null);
 
   // ── Form helpers ──
 
@@ -186,7 +188,7 @@ export default function RoleManager() {
                           ✏️
                         </button>
                         <button
-                          onClick={() => handleDelete(role._id)}
+                          onClick={() => setConfirmDelete(role)}
                           className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 transition-colors text-sm"
                           aria-label={`Delete ${role.label}`}
                           title="Delete"
@@ -253,6 +255,18 @@ export default function RoleManager() {
           )}
         </>
       )}
+
+      {/* ── Confirm delete dialog ── */}
+      <ConfirmDialog
+        open={confirmDelete !== null}
+        title="Delete Role"
+        message={`Are you sure you want to delete "${confirmDelete?.label}"? This action cannot be undone.`}
+        onConfirm={() => {
+          if (confirmDelete) handleDelete(confirmDelete._id);
+          setConfirmDelete(null);
+        }}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </div>
   );
 }
