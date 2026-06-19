@@ -75,13 +75,13 @@ function getShareUrl(counts: Record<string, number>, names?: string[]): string {
 
 export function useAttendees(): {
   attendees: Attendee[];
-  addAttendee: (name: string, roleId: string) => void;
+  addAttendee: (name: string, roleId: string, hourlyRate?: number) => void;
   updateAttendee: (
     id: string,
     updates: Partial<Pick<Attendee, "name" | "roleId">>,
   ) => void;
   deleteAttendee: (id: string) => void;
-  replaceAttendees: (entries: { name: string; roleId: string }[]) => void;
+  replaceAttendees: (entries: { name: string; roleId: string; hourlyRate: number }[]) => void;
   shareUrl: string;
 } {
   const [attendees, setAttendees] = useState<Attendee[]>(() => {
@@ -105,10 +105,10 @@ export function useAttendees(): {
     }
   }, [attendees, hydrated]);
 
-  const addAttendee = useCallback((name: string, roleId: string) => {
+  const addAttendee = useCallback((name: string, roleId: string, hourlyRate = 0) => {
     setAttendees((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), name: name.trim(), roleId },
+      { id: crypto.randomUUID(), name: name.trim(), roleId, hourlyRate },
     ]);
   }, []);
 
@@ -126,12 +126,13 @@ export function useAttendees(): {
   }, []);
 
   const replaceAttendees = useCallback(
-    (entries: { name: string; roleId: string }[]) => {
+    (entries: { name: string; roleId: string; hourlyRate: number }[]) => {
       setAttendees(
         entries.map((e) => ({
           id: crypto.randomUUID(),
           name: e.name,
           roleId: e.roleId,
+          hourlyRate: e.hourlyRate ?? 0,
         })),
       );
     },

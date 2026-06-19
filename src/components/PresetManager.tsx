@@ -8,13 +8,13 @@ import ConfirmDialog from "@/components/ConfirmDialog";
 interface PresetSummary {
   _id: string;
   name: string;
-  attendees: { name: string; roleId: string }[];
+  attendees: { name: string; roleId: string; hourlyRate: number }[];
   createdAt: string;
 }
 
 interface Props {
   attendees: Attendee[];
-  onLoad: (entries: { name: string; roleId: string }[]) => void;
+  onLoad: (entries: { name: string; roleId: string; hourlyRate: number }[]) => void;
 }
 
 export default function PresetManager({ attendees, onLoad }: Props) {
@@ -47,6 +47,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
     const entries = attendees.map((a) => ({
       name: a.name,
       roleId: a.roleId,
+      hourlyRate: a.hourlyRate,
     }));
 
     const res = await fetch("/api/presets", {
@@ -174,6 +175,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
                   <div className="text-xs text-gray-400 dark:text-slate-500">
                     {p.attendees.length}{" "}
                     {p.attendees.length === 1 ? "person" : "people"} ·{" "}
+                    MMK {p.attendees.reduce((s, a) => s + (a.hourlyRate ?? 0), 0).toLocaleString("en-US")}/hr ·{" "}
                     {new Date(p.createdAt).toLocaleDateString()}
                   </div>
                 </button>

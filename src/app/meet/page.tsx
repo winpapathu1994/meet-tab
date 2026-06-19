@@ -42,6 +42,8 @@ export default function MeetPage() {
   }, []);
 
   const totalRatePerHour = attendees.reduce((sum, a) => {
+    // Use stored hourlyRate if available (from saved session / preset)
+    if (a.hourlyRate > 0) return sum + a.hourlyRate;
     // Try API roles by _id first, then static ROLES by short id
     const apiRole = apiRoles.find((r) => r._id === a.roleId);
     if (apiRole) return sum + apiRole.hourlyRate;

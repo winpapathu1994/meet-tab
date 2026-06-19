@@ -2,6 +2,7 @@ export interface Attendee {
   id: string;
   name: string;
   roleId: string;
+  hourlyRate: number;
 }
 
 /** Convert attendees array to role-id → count (for URL sharing) */
@@ -39,6 +40,7 @@ export function fromRoleCounts(
         id: crypto.randomUUID(),
         name: names?.[idx] ?? "",
         roleId,
+        hourlyRate: 0, // resolved from roles at display time for URL-loaded attendees
       });
       idx++;
     }

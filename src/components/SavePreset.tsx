@@ -24,6 +24,7 @@ export default function SavePreset({ attendees }: Props) {
     const entries = attendees.map((a) => ({
       name: a.name,
       roleId: a.roleId,
+      hourlyRate: a.hourlyRate,
     }));
 
     const res = await fetch("/api/presets", {

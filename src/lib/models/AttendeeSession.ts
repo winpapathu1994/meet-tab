@@ -3,6 +3,7 @@ import mongoose, { type Document, type Model, Schema, Types } from "mongoose";
 export interface IAttendeeEntry {
   name: string;
   roleId: string;
+  hourlyRate: number;
 }
 
 export interface IAttendeeSession extends Document {
@@ -15,6 +16,7 @@ const AttendeeEntrySchema = new Schema<IAttendeeEntry>(
   {
     name: { type: String, required: true },
     roleId: { type: String, required: true },
+    hourlyRate: { type: Number, required: true, default: 0 },
   },
   { _id: false },
 );

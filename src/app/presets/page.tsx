@@ -1,18 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { toRoleCounts } from "@/types/attendee";
-import { ROLES } from "@/data/roles";
-import { useRoles } from "@/hooks/useRoles";
 import ConfirmDialog from "@/components/ConfirmDialog";
 
-function getTotalRate(attendees: { roleId: string }[]): number {
-  return attendees.reduce((sum, a) => {
-    const role = ROLES.find((r) => r.id === a.roleId);
-    return sum + (role?.hourlyRate ?? 0);
-  }, 0);
+function getTotalRate(attendees: { hourlyRate?: number }[]): number {
+  return attendees.reduce((sum, a) => sum + (a.hourlyRate ?? 0), 0);
 }
 
 function formatRate(amount: number): string {
@@ -22,6 +17,7 @@ function formatRate(amount: number): string {
 interface PresetEntry {
   name: string;
   roleId: string;
+  hourlyRate: number;
 }
 
 interface PresetSummary {
@@ -66,6 +62,7 @@ export default function PresetsPage() {
         id: crypto.randomUUID(),
         name: a.name,
         roleId: a.roleId,
+        hourlyRate: a.hourlyRate ?? 0,
       }));
       const counts = toRoleCounts(entries);
       const segments = Object.entries(counts)
