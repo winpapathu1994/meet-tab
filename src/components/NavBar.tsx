@@ -3,12 +3,10 @@
 import { useCallback, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import UserMenu from "@/components/UserMenu";
-import logo from "@/app/logo.png";
 
 interface Tab {
   label: string;
@@ -40,20 +38,14 @@ export default function NavBar() {
   return (
     <nav className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 z-30 shadow-sm dark:shadow-none">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-12">
-        {/* ── Left: Logo + Brand ── */}
+        {/* ── Left: Brand ── */}
         <Link
           href="/meet"
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0"
+          className="hover:opacity-80 transition-opacity shrink-0"
         >
-          <Image
-            src={logo}
-            alt="MeetTab"
-            width={24}
-            height={24}
-            className="shrink-0"
-          />
-          <span className="text-slate-900 dark:text-white font-bold text-base tracking-tight hidden sm:inline">
-            MeetTab
+          <span className="text-slate-900 dark:text-white font-bold text-lg tracking-tight hidden sm:inline">
+            <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">Meet</span>
+            <span className="font-light tracking-tighter">Tab</span>
           </span>
         </Link>
 
