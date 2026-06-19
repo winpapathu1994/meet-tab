@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     await setTokenCookie(token);
 
     return jsonResponse({
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id, name: user.name, email: user.email, image: user.image || "" },
     }, 201);
   } catch (error) {
     console.error("Register error:", error);

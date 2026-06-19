@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import UserMenu from "@/components/UserMenu";
 import logo from "@/app/logo.png";
 
 interface Tab {
@@ -84,13 +85,7 @@ export default function NavBar() {
           {/* Desktop user area */}
           <div className="hidden md:flex items-center gap-2">
             <ThemeToggle />
-            <div className="flex items-center gap-2 px-2 py-1 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-              {/* Avatar circle */}
-              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold shrink-0">
-                {user.name?.charAt(0).toUpperCase() ?? "?"}
-              </div>
-              <span className="text-[#e5e7eb] text-sm font-medium">{user.name}</span>
-            </div>
+            <UserMenu />
             <button
               onClick={() => setConfirmLogout(true)}
               className="p-1.5 rounded-lg text-[#9ca3af] hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
@@ -158,9 +153,13 @@ export default function NavBar() {
           {/* User info + logout */}
           <div className="px-4 py-3 border-t border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold">
-                {user.name?.charAt(0).toUpperCase() ?? "?"}
-              </div>
+              {user.image ? (
+                <img src={user.image} alt={user.name} className="w-7 h-7 rounded-full object-cover" />
+              ) : (
+                <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold">
+                  {user.name?.charAt(0).toUpperCase() ?? "?"}
+                </div>
+              )}
               <span className="text-[#e5e7eb] text-sm font-medium">{user.name}</span>
             </div>
             <button
