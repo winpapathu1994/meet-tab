@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     await setTokenCookie(token);
 
     return jsonResponse({
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id, name: user.name, email: user.email, image: user.image || "" },
     });
   } catch (error) {
     console.error("Login error:", error);

@@ -11,13 +11,13 @@ export async function GET() {
 
     await connectDB();
 
-    const user = await User.findById(userId).select("name email");
+    const user = await User.findById(userId).select("name email image");
     if (!user) {
       return jsonResponse({ user: null });
     }
 
     return jsonResponse({
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id, name: user.name, email: user.email, image: user.image || "" },
     });
   } catch (error) {
     console.error("Me error:", error);

@@ -13,6 +13,7 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
+  image?: string;
 }
 
 export interface AuthResult {
@@ -30,6 +31,7 @@ interface AuthState {
     password: string,
   ) => Promise<AuthResult>;
   logout: () => Promise<void>;
+  updateUser: (updates: Partial<Pick<AuthUser, "name" | "image">>) => void;
 }
 
 const AuthContext = createContext<AuthState | null>(null);
@@ -76,13 +78,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const updateUser = useCallback(
+    (updates: Partial<Pick<AuthUser, "name" | "image">>) => {
+      setUser((prev) => (prev ? { ...prev, ...updates } : prev));
+    },
+    [],
+  );
+
   const logout = useCallback(async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
   }, []);
 
   return (
-    <AuthContext value={{ user, loading, login, register, logout }}>
+    <AuthContext value={{ user, loading, login, register, logout, updateUser }}>
       {children}
     </AuthContext>
   );
