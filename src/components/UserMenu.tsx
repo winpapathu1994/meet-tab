@@ -157,10 +157,29 @@ export default function UserMenu() {
         </span>
       </button>
 
-      {/* Dropdown panel */}
+      {/* Dropdown panel — desktop: anchored dropdown; mobile: centered overlay */}
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-80 rounded-xl bg-[#1e293b] border border-white/10 shadow-2xl z-50 p-5">
-          <h3 className="text-white font-semibold text-base mb-4">Profile Settings</h3>
+        <>
+          {/* Mobile backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm sm:hidden"
+            onClick={() => setOpen(false)}
+          />
+
+          <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-h-[90vh] overflow-y-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 sm:inset-x-auto sm:translate-y-0 sm:max-h-none sm:overflow-y-visible sm:w-80 z-50 rounded-xl bg-[#1e293b] border border-white/10 shadow-2xl p-5">
+            {/* Header with close button */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-white font-semibold text-base">Profile Settings</h3>
+              <button
+                onClick={() => setOpen(false)}
+                className="sm:hidden p-1 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                aria-label="Close"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
 
           {/* Avatar section */}
           <div className="flex items-center gap-4 mb-4">
@@ -298,6 +317,7 @@ export default function UserMenu() {
             </button>
           </div>
         </div>
+        </>
       )}
     </div>
   );

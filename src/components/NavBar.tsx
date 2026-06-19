@@ -37,7 +37,7 @@ export default function NavBar() {
   if (pathname.startsWith("/api-docs") || loading || !user) return null;
 
   return (
-    <nav className="w-full bg-[#1f2937] border-b border-white/10 relative">
+    <nav className="w-full bg-[#1f2937] border-b border-white/10 fixed top-0 left-0 z-30">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-12">
         {/* ── Left: Logo + Brand ── */}
         <Link
@@ -150,18 +150,9 @@ export default function NavBar() {
             })}
           </div>
 
-          {/* User info + logout */}
+          {/* User info + profile + logout */}
           <div className="px-4 py-3 border-t border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              {user.image ? (
-                <img src={user.image} alt={user.name} className="w-7 h-7 rounded-full object-cover" />
-              ) : (
-                <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold">
-                  {user.name?.charAt(0).toUpperCase() ?? "?"}
-                </div>
-              )}
-              <span className="text-[#e5e7eb] text-sm font-medium">{user.name}</span>
-            </div>
+            <UserMenu />
             <button
               onClick={() => {
                 setMobileOpen(false);
