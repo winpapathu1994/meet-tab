@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Attendee } from "@/types/attendee";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 interface Props {
   attendees: Attendee[];
@@ -19,6 +20,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
   const [loading, setLoading] = useState(false);
   const [clearing, setClearing] = useState(false);
   const [hasSavedData, setHasSavedData] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
 
   // Check if there's saved data in MongoDB
   useEffect(() => {
@@ -119,6 +121,19 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         </div>
       )}
 
+      {/* ── Confirm clear dialog ── */}
+      <ConfirmDialog
+        open={confirmClear}
+        title="Clear Saved Data"
+        message="Are you sure you want to clear all saved attendee data? This action cannot be undone."
+        confirmLabel="Clear"
+        onConfirm={() => {
+          handleClear();
+          setConfirmClear(false);
+        }}
+        onCancel={() => setConfirmClear(false)}
+      />
+
       {/* Buttons row */}
       <div className="flex gap-2 justify-center">
         <button
@@ -138,7 +153,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
           {loading ? "…" : "📂 Load"}
         </button>
         <button
-          onClick={handleClear}
+          onClick={() => setConfirmClear(true)}
           disabled={clearing || !hasSavedData}
           className="px-4 py-2 rounded-md bg-danger hover:bg-danger-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
           title={hasSavedData ? "Delete saved data" : "Nothing to clear"}

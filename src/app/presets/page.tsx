@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toRoleCounts } from "@/types/attendee";
 import { ROLES } from "@/data/roles";
 import { useRoles } from "@/hooks/useRoles";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 function getTotalRate(attendees: { roleId: string }[]): number {
   return attendees.reduce((sum, a) => {
@@ -36,6 +37,7 @@ export default function PresetsPage() {
 
   const [presets, setPresets] = useState<PresetSummary[]>([]);
   const [fetching, setFetching] = useState(true);
+  const [confirmDelete, setConfirmDelete] = useState<PresetSummary | null>(null);
 
   // Fetch presets
   const fetchPresets = useCallback(() => {
@@ -141,7 +143,7 @@ export default function PresetsPage() {
                     🔄 Reuse
                   </button>
                   <button
-                    onClick={() => handleDelete(p._id)}
+                    onClick={() => setConfirmDelete(p)}
                     className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
                     aria-label={`Delete ${p.name}`}
                     title="Delete"
@@ -154,6 +156,18 @@ export default function PresetsPage() {
           </ul>
         )}
       </div>
+
+      {/* ── Confirm delete dialog ── */}
+      <ConfirmDialog
+        open={confirmDelete !== null}
+        title="Delete Session"
+        message={`Are you sure you want to delete "${confirmDelete?.name}"? This action cannot be undone.`}
+        onConfirm={() => {
+          if (confirmDelete) handleDelete(confirmDelete._id);
+          setConfirmDelete(null);
+        }}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </div>
   );
 }

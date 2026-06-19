@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Attendee } from "@/types/attendee";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 interface PresetSummary {
   _id: string;
@@ -24,6 +25,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
   const [showSave, setShowSave] = useState(false);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState<PresetSummary | null>(null);
 
   // Fetch presets when logged in
   useEffect(() => {
@@ -138,6 +140,18 @@ export default function PresetManager({ attendees, onLoad }: Props) {
 
       {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
 
+      {/* ── Confirm delete dialog ── */}
+      <ConfirmDialog
+        open={confirmDelete !== null}
+        title="Delete Preset"
+        message={`Are you sure you want to delete "${confirmDelete?.name}"? This action cannot be undone.`}
+        onConfirm={() => {
+          if (confirmDelete) handleDelete(confirmDelete._id);
+          setConfirmDelete(null);
+        }}
+        onCancel={() => setConfirmDelete(null)}
+      />
+
       {/* Load section */}
       {presets.length > 0 && (
         <details className="group">
@@ -164,7 +178,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
                   </div>
                 </button>
                 <button
-                  onClick={() => handleDelete(p._id)}
+                  onClick={() => setConfirmDelete(p)}
                   className="text-gray-300 hover:text-danger dark:text-slate-600 dark:hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 text-xs px-1 transition-colors"
                   title="Delete preset"
                 >
