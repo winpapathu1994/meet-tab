@@ -8,7 +8,7 @@ A browser-based meeting cost counter built on Next.js with JWT authentication an
 
 ## Story
 
-Lily is a team lead at a Yangon-based software firm. Her opens MeetTab, logs in, and adds his team by name — Alice (Senior Dev), Bob (Junior Dev), Carol (Junior Dev), David (Manager), Emily (Designer). She saves this session as "Sprint Planning". The projector shows "MMK 52,400 — 18 min 32 sec" in large text. Everyone instinctively keeps it brief. Next sprint, she opens the app, logs in, opens the Sessions tab, and clicks Reuse on her saved session — names and roles are restored instantly.
+Lily is a team lead at a Yangon-based software firm. Her opens MeetTab, logs in, and adds her team by name — Alice (Senior Dev), Bob (Junior Dev), Carol (Junior Dev), David (Manager), Emily (Designer). She saves this session as "Sprint Planning". The projector shows "MMK 52,400 — 18 min 32 sec" in large text. Everyone instinctively keeps it brief. Next sprint, she opens the app, logs in, opens the Sessions tab, and clicks Reuse on her saved session — names and roles are restored instantly.
 
 ## Why
 
