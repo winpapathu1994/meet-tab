@@ -14,6 +14,7 @@ interface Props {
     updates: Partial<Pick<Attendee, "name" | "roleId">>,
   ) => void;
   onDelete: (id: string) => void;
+  readOnly?: boolean;
 }
 
 export default function AttendeeManager({
@@ -22,6 +23,7 @@ export default function AttendeeManager({
   onAdd,
   onUpdate,
   onDelete,
+  readOnly,
 }: Props) {
   const { roles: apiRoles } = useRoles();
 
@@ -174,24 +176,26 @@ export default function AttendeeManager({
                     {fmtRate(roleInfo(a.roleId, a.hourlyRate).hourlyRate)}/hr
                   </div>
                 </div>
-                <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    onClick={() => openEdit(a)}
-                    className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 transition-colors text-sm"
-                    aria-label={`Edit ${a.name || "unnamed attendee"}`}
-                    title="Edit"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    onClick={() => setConfirmDelete(a)}
-                    className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
-                    aria-label={`Remove ${a.name || "unnamed attendee"}`}
-                    title="Remove"
-                  >
-                    🗑️
-                  </button>
-                </div>
+                {!readOnly && (
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => openEdit(a)}
+                      className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 transition-colors text-sm"
+                      aria-label={`Edit ${a.name || "unnamed attendee"}`}
+                      title="Edit"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      onClick={() => setConfirmDelete(a)}
+                      className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
+                      aria-label={`Remove ${a.name || "unnamed attendee"}`}
+                      title="Remove"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                )}
               </li>
             ),
           )}
@@ -238,7 +242,7 @@ export default function AttendeeManager({
       )}
 
       {/* ── Add button ── */}
-      {!isFormOpen && (
+      {!readOnly && !isFormOpen && (
         <button
           onClick={openAdd}
           className="w-full py-2.5 rounded-lg border-2 border-dashed border-gray-300 dark:border-slate-600 text-gray-500 dark:text-slate-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-slate-500 transition-colors text-sm font-medium"

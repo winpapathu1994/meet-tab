@@ -12,6 +12,7 @@ interface Props {
   onReset: () => void;
   onShare: () => void;
   onEndMeeting: () => void;
+  readOnly?: boolean;
 }
 
 export default function TimerControls({
@@ -23,6 +24,7 @@ export default function TimerControls({
   onReset,
   onShare,
   onEndMeeting,
+  readOnly,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -34,7 +36,7 @@ export default function TimerControls({
 
   return (
     <div className="flex flex-wrap items-center gap-3 justify-center">
-      {state === "idle" && (
+      {!readOnly && state === "idle" && (
         <button
           onClick={onStart}
           disabled={!hasRoles}
@@ -50,7 +52,7 @@ export default function TimerControls({
         </button>
       )}
 
-      {state === "running" && (
+      {!readOnly && state === "running" && (
         <div className="flex items-center gap-3">
           <button
             onClick={onPause}
@@ -73,7 +75,7 @@ export default function TimerControls({
         </div>
       )}
 
-      {state === "paused" && (
+      {!readOnly && state === "paused" && (
         <div className="flex items-center gap-3">
           <button
             onClick={onResume}
@@ -105,7 +107,8 @@ export default function TimerControls({
         </div>
       )}
 
-      {state !== "idle" && (
+      {/* Copy Link — always available in read-only, else only when running/paused */}
+      {(readOnly || state !== "idle") && (
         <button
           onClick={handleCopy}
           className={`flex items-center gap-1.5 px-4 py-3 rounded-xl text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
