@@ -40,7 +40,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
   }, [user]);
 
   const handleSave = useCallback(async () => {
-    if (!presetName.trim()) return;
+    if (!presetName.trim() || attendees.length === 0) return;
     setSaving(true);
     setError("");
 
@@ -125,7 +125,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
           />
           <button
             onClick={handleSave}
-            disabled={!presetName.trim() || saving}
+            disabled={!presetName.trim() || saving || !hasAttendees}
             className="px-4 py-2 rounded-md bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
           >
             {saving ? "…" : "Save"}

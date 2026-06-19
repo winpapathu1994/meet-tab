@@ -109,7 +109,7 @@ export default function PresetsPage() {
           <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-8">Loading…</p>
         ) : presets.length === 0 ? (
           <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-8">
-            No saved sessions yet. Create one from the Meet tab.
+            No saved sessions yet. Create one from the MeetTab.
           </p>
         ) : (
           <ul className="space-y-1">
