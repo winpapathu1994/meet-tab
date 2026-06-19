@@ -3,8 +3,10 @@
 import { useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
+import logo from "@/app/logo.png";
 
 interface Tab {
   label: string;
@@ -33,8 +35,21 @@ export default function NavBar() {
   return (
     <nav className="w-full bg-[#1f2937] border-b border-white/10">
       <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-12">
-        {/* Tabs */}
         <div className="flex items-center h-full">
+          {/* Brand */}
+          <Image
+            src={logo}
+            alt="MeetTab"
+            width={24}
+            height={24}
+            className="shrink-0"
+          />
+          <span className="text-white font-bold text-base tracking-tight mr-6 ml-2">
+            MeetTab
+          </span>
+
+          {/* Tabs */}
+          <div className="flex items-center h-full">
           {TABS.map((tab) => {
             const active = pathname.startsWith(tab.href);
             return (
@@ -51,6 +66,7 @@ export default function NavBar() {
               </Link>
             );
           })}
+        </div>
         </div>
 
         {/* User + logout + theme toggle */}
