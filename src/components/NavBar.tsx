@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import logo from "@/app/logo.png";
 
 interface Tab {
@@ -24,6 +25,7 @@ export default function NavBar() {
   const router = useRouter();
   const { user, loading, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
 
   const handleLogout = useCallback(async () => {
     await logout();
@@ -81,14 +83,25 @@ export default function NavBar() {
         <div className="flex items-center gap-2 shrink-0">
           {/* Desktop user area */}
           <div className="hidden md:flex items-center gap-2">
-            <span className="text-[#9ca3af] text-sm">{user.name}</span>
-            <button
-              onClick={handleLogout}
-              className="text-sm px-2 py-1 rounded-md text-[#9ca3af] hover:text-danger hover:bg-white/5 transition-colors"
-            >
-              Logout
-            </button>
             <ThemeToggle />
+            <div className="flex items-center gap-2 px-2 py-1 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+              {/* Avatar circle */}
+              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold shrink-0">
+                {user.name?.charAt(0).toUpperCase() ?? "?"}
+              </div>
+              <span className="text-[#e5e7eb] text-sm font-medium">{user.name}</span>
+            </div>
+            <button
+              onClick={() => setConfirmLogout(true)}
+              className="p-1.5 rounded-lg text-[#9ca3af] hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
+              aria-label="Logout"
+              title="Logout"
+            >
+              {/* Logout icon */}
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+              </svg>
+            </button>
           </div>
 
           {/* Mobile theme toggle (always visible on small screens) */}
@@ -144,19 +157,41 @@ export default function NavBar() {
 
           {/* User info + logout */}
           <div className="px-4 py-3 border-t border-white/10 flex items-center justify-between">
-            <span className="text-[#9ca3af] text-sm">{user.name}</span>
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold">
+                {user.name?.charAt(0).toUpperCase() ?? "?"}
+              </div>
+              <span className="text-[#e5e7eb] text-sm font-medium">{user.name}</span>
+            </div>
             <button
               onClick={() => {
                 setMobileOpen(false);
-                handleLogout();
+                setConfirmLogout(true);
               }}
-              className="text-sm px-2 py-1 rounded-md text-[#9ca3af] hover:text-danger hover:bg-white/5 transition-colors"
+              className="p-1.5 rounded-lg text-[#9ca3af] hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
+              aria-label="Logout"
+              title="Logout"
             >
-              Logout
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+              </svg>
             </button>
           </div>
         </div>
       )}
+
+      {/* ── Confirm logout dialog ── */}
+      <ConfirmDialog
+        open={confirmLogout}
+        title="Logout"
+        message="Are you sure you want to logout?"
+        confirmLabel="Logout"
+        onConfirm={() => {
+          setConfirmLogout(false);
+          handleLogout();
+        }}
+        onCancel={() => setConfirmLogout(false)}
+      />
     </nav>
   );
 }
