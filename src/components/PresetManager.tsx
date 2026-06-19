@@ -92,7 +92,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
     <div className="w-full max-w-lg mx-auto space-y-3">
       {/* Success toast */}
       {successMsg && (
-        <div className="text-center text-sm text-emerald-400 animate-pulse">
+        <div className="text-center text-sm text-emerald-600 dark:text-emerald-400 animate-pulse">
           {successMsg}
         </div>
       )}
@@ -102,7 +102,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
         <button
           onClick={() => setShowSave(true)}
           disabled={!hasAttendees}
-          className="w-full py-2 rounded-lg border border-dashed border-slate-600 text-slate-400 hover:text-white hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+          className="w-full py-2 rounded-lg border border-dashed border-gray-300 dark:border-slate-600 text-gray-500 dark:text-slate-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm font-medium"
         >
           💾 Save as Preset
         </button>
@@ -118,46 +118,46 @@ export default function PresetManager({ attendees, onLoad }: Props) {
               if (e.key === "Escape") setShowSave(false);
             }}
             placeholder="e.g., Sprint Planning"
-            className="flex-1 px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="flex-1 px-3 py-2 rounded-md bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500"
           />
           <button
             onClick={handleSave}
             disabled={!presetName.trim() || saving}
-            className="px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white text-sm font-medium transition-colors"
           >
             {saving ? "…" : "Save"}
           </button>
           <button
             onClick={() => setShowSave(false)}
-            className="px-3 py-2 rounded-md text-sm text-slate-400 hover:text-white transition-colors"
+            className="px-3 py-2 rounded-md text-sm text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white transition-colors"
           >
             Cancel
           </button>
         </div>
       )}
 
-      {error && <p className="text-red-400 text-sm">{error}</p>}
+      {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
 
       {/* Load section */}
       {presets.length > 0 && (
         <details className="group">
-          <summary className="cursor-pointer text-sm text-slate-500 hover:text-slate-300 transition-colors select-none">
+          <summary className="cursor-pointer text-sm text-gray-400 hover:text-gray-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors select-none">
             📂 Load Preset ({presets.length})
           </summary>
           <div className="mt-2 space-y-1 max-h-48 overflow-y-auto">
             {presets.map((p) => (
               <div
                 key={p._id}
-                className="flex items-center justify-between gap-2 py-2 px-2 rounded-md hover:bg-slate-800 transition-colors"
+                className="flex items-center justify-between gap-2 py-2 px-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <button
                   onClick={() => handleLoad(p)}
                   className="flex-1 text-left"
                 >
-                  <div className="text-white text-sm font-medium truncate">
+                  <div className="text-gray-900 dark:text-white text-sm font-medium truncate">
                     {p.name}
                   </div>
-                  <div className="text-xs text-slate-500">
+                  <div className="text-xs text-gray-400 dark:text-slate-500">
                     {p.attendees.length}{" "}
                     {p.attendees.length === 1 ? "person" : "people"} ·{" "}
                     {new Date(p.createdAt).toLocaleDateString()}
@@ -165,7 +165,7 @@ export default function PresetManager({ attendees, onLoad }: Props) {
                 </button>
                 <button
                   onClick={() => handleDelete(p._id)}
-                  className="text-slate-600 hover:text-red-400 text-xs px-1 transition-colors"
+                  className="text-gray-300 hover:text-red-400 dark:text-slate-600 dark:hover:text-red-400 text-xs px-1 transition-colors"
                   title="Delete preset"
                 >
                   🗑️

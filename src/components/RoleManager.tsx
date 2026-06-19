@@ -101,7 +101,7 @@ export default function RoleManager() {
 
   return (
     <div className="w-full max-w-lg mx-auto space-y-3">
-      <h2 className="text-lg font-semibold text-slate-300 uppercase tracking-wider">
+      <h2 className="text-lg font-semibold text-gray-600 dark:text-slate-300 uppercase tracking-wider">
         Roles
       </h2>
 
@@ -110,7 +110,7 @@ export default function RoleManager() {
 
       {/* ── Role list ── */}
       {roles.length === 0 ? (
-        <p className="text-slate-500 text-sm text-center py-4">
+        <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-4">
           No roles defined yet.
         </p>
       ) : (
@@ -120,7 +120,7 @@ export default function RoleManager() {
               /* ── Edit row ── */
               <li
                 key={role._id}
-                className="flex flex-col gap-2 p-3 rounded-lg bg-slate-800 border border-slate-600"
+                className="flex flex-col gap-2 p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600"
               >
                 <div className="flex gap-2">
                   <input
@@ -130,7 +130,7 @@ export default function RoleManager() {
                     onChange={(e) => setFormLabel(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Role label"
-                    className="flex-1 px-3 py-2 rounded-md bg-slate-700 border border-slate-600 text-white text-sm placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                    className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
                   />
                   <input
                     type="number"
@@ -139,20 +139,20 @@ export default function RoleManager() {
                     onKeyDown={handleKeyDown}
                     placeholder="Rate"
                     min={0}
-                    className="w-28 px-3 py-2 rounded-md bg-slate-700 border border-slate-600 text-white text-sm placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                    className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
                   />
                 </div>
                 <div className="flex gap-2 justify-end">
                   <button
                     onClick={cancel}
-                    className="px-3 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                    className="px-3 py-1.5 rounded-md text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={!formLabel.trim() || saving}
-                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white transition-colors"
+                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
                   >
                     {saving ? "…" : "Save"}
                   </button>
@@ -162,13 +162,13 @@ export default function RoleManager() {
               /* ── Display row ── */
               <li
                 key={role._id}
-                className="flex items-center justify-between gap-3 py-2.5 px-1 border-b border-slate-800"
+                className="flex items-center justify-between gap-3 py-2.5 px-1 border-b border-gray-200 dark:border-slate-800"
               >
                 <div className="flex-1 min-w-0">
-                  <div className="text-white font-medium truncate">
+                  <div className="text-gray-900 dark:text-white font-medium truncate">
                     {role.label}
                   </div>
-                  <div className="text-sm text-slate-400">
+                  <div className="text-sm text-gray-500 dark:text-slate-400">
                     MMK {role.hourlyRate.toLocaleString("en-US")}/hr
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export default function RoleManager() {
                   <div className="flex items-center gap-1 shrink-0">
                     <button
                       onClick={() => openEdit(role)}
-                      className="w-8 h-8 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 transition-colors text-sm"
+                      className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors text-sm"
                       aria-label={`Edit ${role.label}`}
                       title="Edit"
                     >
@@ -184,7 +184,7 @@ export default function RoleManager() {
                     </button>
                     <button
                       onClick={() => handleDelete(role._id)}
-                      className="w-8 h-8 rounded-md text-slate-400 hover:text-red-400 hover:bg-slate-700 transition-colors text-sm"
+                      className="w-8 h-8 rounded-md text-gray-500 hover:text-red-400 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-red-400 dark:hover:bg-slate-700 transition-colors text-sm"
                       aria-label={`Delete ${role.label}`}
                       title="Delete"
                     >
@@ -200,7 +200,7 @@ export default function RoleManager() {
 
       {/* ── Add form ── */}
       {user && adding && (
-        <div className="flex flex-col gap-2 p-3 rounded-lg bg-slate-800 border border-slate-600">
+        <div className="flex flex-col gap-2 p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600">
           <div className="flex gap-2">
             <input
               autoFocus
@@ -209,7 +209,7 @@ export default function RoleManager() {
               onChange={(e) => setFormLabel(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Role label"
-              className="flex-1 px-3 py-2 rounded-md bg-slate-700 border border-slate-600 text-white text-sm placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="flex-1 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
             />
             <input
               type="number"
@@ -218,20 +218,20 @@ export default function RoleManager() {
               onKeyDown={handleKeyDown}
               placeholder="Rate"
               min={0}
-              className="w-28 px-3 py-2 rounded-md bg-slate-700 border border-slate-600 text-white text-sm placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="w-28 px-3 py-2 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-emerald-500"
             />
           </div>
           <div className="flex gap-2 justify-end">
             <button
               onClick={cancel}
-              className="px-3 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+              className="px-3 py-1.5 rounded-md text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={!formLabel.trim() || saving}
-              className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white transition-colors"
+              className="px-4 py-1.5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white transition-colors"
             >
               {saving ? "…" : "Create"}
             </button>
@@ -243,7 +243,7 @@ export default function RoleManager() {
       {user && !isFormOpen && (
         <button
           onClick={openAdd}
-          className="w-full py-2.5 rounded-lg border-2 border-dashed border-slate-600 text-slate-400 hover:text-white hover:border-slate-500 transition-colors text-sm font-medium"
+          className="w-full py-2.5 rounded-lg border-2 border-dashed border-gray-300 dark:border-slate-600 text-gray-500 dark:text-slate-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-slate-500 transition-colors text-sm font-medium"
         >
           + Add Role
         </button>

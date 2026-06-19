@@ -34,7 +34,7 @@ export default function TimerControls({
         <button
           onClick={onStart}
           disabled={!hasRoles}
-          className="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-semibold text-lg transition-colors"
+          className="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-100 disabled:text-gray-400 dark:disabled:bg-slate-700 dark:disabled:text-slate-500 text-white font-semibold text-lg transition-colors"
         >
           Start Meeting
         </button>
@@ -59,7 +59,7 @@ export default function TimerControls({
           </button>
           <button
             onClick={onReset}
-            className="px-6 py-3 rounded-lg bg-slate-600 hover:bg-slate-500 text-white font-semibold text-lg transition-colors"
+            className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-slate-600 dark:hover:bg-slate-500 text-gray-900 dark:text-white font-semibold text-lg transition-colors"
           >
             Reset
           </button>
@@ -72,7 +72,7 @@ export default function TimerControls({
           className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
             copied
               ? "bg-emerald-600 text-white"
-              : "bg-slate-700 hover:bg-slate-600 text-slate-300"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-600 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-300"
           }`}
           title="Copy shareable link"
         >

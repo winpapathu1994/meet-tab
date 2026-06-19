@@ -19,8 +19,8 @@ export default function RolesPage() {
   // Loading spinner while auth resolves
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -29,8 +29,8 @@ export default function RolesPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
-      <h1 className="text-3xl font-bold text-white tracking-tight">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col items-center justify-center p-6 gap-8">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
         Roles
       </h1>
       <RoleManager />

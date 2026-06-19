@@ -111,8 +111,8 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <div
           className={`text-center text-sm ${
             message.kind === "success"
-              ? "text-emerald-400"
-              : "text-red-400"
+              ? "text-emerald-600 dark:text-emerald-400"
+              : "text-red-500 dark:text-red-400"
           }`}
         >
           {message.text}
@@ -124,7 +124,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="px-4 py-2 rounded-md bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-300 text-sm font-medium transition-colors"
+          className="px-4 py-2 rounded-md bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 disabled:opacity-50 text-gray-600 dark:text-slate-300 text-sm font-medium transition-colors"
           title={hasAttendees ? "Save attendees to database" : "No attendees to save"}
         >
           {saving ? "…" : "💾 Save"}
@@ -132,7 +132,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={handleLoad}
           disabled={loading || !hasSavedData}
-          className="px-4 py-2 rounded-md bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 text-sm font-medium transition-colors"
+          className="px-4 py-2 rounded-md bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-gray-600 dark:text-slate-300 text-sm font-medium transition-colors"
           title={hasSavedData ? "Load saved attendees" : "No saved data"}
         >
           {loading ? "…" : "📂 Load"}
@@ -140,7 +140,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={handleClear}
           disabled={clearing || !hasSavedData}
-          className="px-4 py-2 rounded-md bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-slate-500 hover:text-red-400 text-sm font-medium transition-colors"
+          className="px-4 py-2 rounded-md bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-gray-400 dark:text-slate-500 hover:text-red-400 text-sm font-medium transition-colors"
           title={hasSavedData ? "Delete saved data" : "Nothing to clear"}
         >
           {clearing ? "…" : "🗑️ Clear"}
