@@ -4,7 +4,7 @@ import { convertCurrency, CURRENCY_SYMBOLS, formatCost } from "../data/roles";
 
 interface Props {
   elapsedSeconds: number;
-  totalRatePerHour: number; // MMK
+  totalRatePerHour: number;
   currency: Currency;
 }
 
@@ -26,28 +26,27 @@ export default function CostDisplay({
   const cost = convertCurrency(costMMK, currency);
 
   return (
-    <div className="flex flex-col items-center gap-6 select-none">
-      {/* Timer */}
-      <div className="font-mono tabular-nums text-gray-500 dark:text-slate-400 text-4xl md:text-6xl tracking-wider">
+    <div className="flex flex-col items-center gap-10 select-none">
+      {/* Timer — clean monospace */}
+      <div className="font-mono tabular-nums text-slate-400 dark:text-slate-500 text-5xl md:text-7xl font-light tracking-[0.15em]">
         {fmtTime(elapsedSeconds)}
       </div>
 
-      {/* Cost — the hero element */}
+      {/* Cost — the hero */}
       <AnimatedCost cost={cost} currency={currency} />
 
-      {/* Rate label */}
-      <div className="text-gray-400 dark:text-slate-500 text-lg">
+      {/* Rate subtitle */}
+      <div className="text-slate-400 dark:text-slate-500 text-base font-medium tracking-wide">
         {CURRENCY_SYMBOLS[currency]}{" "}
         {formatCost(totalRatePerHour, currency)
           .replace(/MMK|USD|SGD|\$|S\$/g, "")
           .trim()}
-        /hr
+        /hr running
       </div>
     </div>
   );
 }
 
-/** Cost number that animates digit changes with a subtle flip effect */
 function AnimatedCost({
   cost,
   currency,
@@ -61,7 +60,7 @@ function AnimatedCost({
   useEffect(() => {
     if (Math.floor(cost) !== Math.floor(prevRef.current)) {
       setFlash(true);
-      const t = setTimeout(() => setFlash(false), 150);
+      const t = setTimeout(() => setFlash(false), 200);
       prevRef.current = cost;
       return () => clearTimeout(t);
     }
@@ -76,9 +75,13 @@ function AnimatedCost({
 
   return (
     <div
-      className={`font-mono tabular-nums font-bold text-gray-900 dark:text-white leading-none
-        text-5xl sm:text-6xl md:text-7xl lg:text-8xl
-        transition-colors duration-150 ${flash ? "text-amber-500 dark:text-amber-400" : ""}`}
+      className={`font-mono tabular-nums font-bold text-slate-900 dark:text-white leading-none
+        text-6xl sm:text-7xl md:text-8xl lg:text-9xl
+        transition-all duration-200 ${
+          flash
+            ? "scale-[1.02] text-primary"
+            : "scale-100"
+        }`}
     >
       {display}
     </div>

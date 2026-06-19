@@ -29,12 +29,12 @@ function roleIcon(label: string): string {
 }
 
 const ROLE_COLORS: Record<string, string> = {
-  "🌱": "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  "⚡": "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  "🧭": "bg-violet-500/10 text-violet-400 border-violet-500/20",
-  "🎨": "bg-pink-500/10 text-pink-400 border-pink-500/20",
-  "🔍": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-  "⚙️": "bg-orange-500/10 text-orange-400 border-orange-500/20",
+  "🌱": "bg-emerald-100 text-emerald-600 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20",
+  "⚡": "bg-amber-100 text-amber-600 border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20",
+  "🧭": "bg-violet-100 text-violet-600 border-violet-200 dark:bg-violet-500/10 dark:text-violet-400 dark:border-violet-500/20",
+  "🎨": "bg-pink-100 text-pink-600 border-pink-200 dark:bg-pink-500/10 dark:text-pink-400 dark:border-pink-500/20",
+  "🔍": "bg-cyan-100 text-cyan-600 border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-400 dark:border-cyan-500/20",
+  "⚙️": "bg-orange-100 text-orange-600 border-orange-200 dark:bg-orange-500/10 dark:text-orange-400 dark:border-orange-500/20",
   "👤": "bg-gray-100 text-gray-500 border-gray-300 dark:bg-slate-500/10 dark:text-slate-400 dark:border-slate-500/20",
 };
 

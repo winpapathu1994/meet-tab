@@ -18,7 +18,8 @@ interface Tab {
 const TABS: Tab[] = [
   { label: "Meet", href: "/meet" },
   { label: "Roles", href: "/roles" },
-  { label: "Preset Sessions", href: "/presets" },
+  { label: "Preset", href: "/presets" },
+  { label: "History", href: "/history" },
 ];
 
 export default function NavBar() {
@@ -37,7 +38,7 @@ export default function NavBar() {
   if (pathname.startsWith("/api-docs") || loading || !user) return null;
 
   return (
-    <nav className="w-full bg-[#1f2937] border-b border-white/10 fixed top-0 left-0 z-30">
+    <nav className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 z-30 shadow-sm dark:shadow-none">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-12">
         {/* ── Left: Logo + Brand ── */}
         <Link
@@ -51,7 +52,7 @@ export default function NavBar() {
             height={24}
             className="shrink-0"
           />
-          <span className="text-white font-bold text-base tracking-tight hidden sm:inline">
+          <span className="text-slate-900 dark:text-white font-bold text-base tracking-tight hidden sm:inline">
             MeetTab
           </span>
         </Link>
@@ -66,8 +67,8 @@ export default function NavBar() {
                 href={tab.href}
                 className={`relative flex items-center h-full px-4 text-sm font-medium transition-colors ${
                   active
-                    ? "text-white bg-white/10"
-                    : "text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/5"
+                    ? "text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-50 dark:hover:text-slate-200 dark:hover:bg-white/5"
                 }`}
               >
                 {tab.label}
@@ -88,7 +89,7 @@ export default function NavBar() {
             <UserMenu />
             <button
               onClick={() => setConfirmLogout(true)}
-              className="p-1.5 rounded-lg text-[#9ca3af] hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
+              className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
               aria-label="Logout"
               title="Logout"
             >
@@ -107,7 +108,7 @@ export default function NavBar() {
           {/* Hamburger (mobile only) */}
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="md:hidden p-1.5 rounded-md text-[#9ca3af] hover:text-white hover:bg-white/5 transition-colors"
+            className="md:hidden p-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:hover:text-slate-200 dark:hover:bg-white/5 transition-colors"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
@@ -128,7 +129,7 @@ export default function NavBar() {
 
       {/* ── Mobile drawer ── */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 bg-[#1f2937]">
+        <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
           {/* Nav links */}
           <div className="px-2 py-1">
             {TABS.map((tab) => {
@@ -140,8 +141,8 @@ export default function NavBar() {
                   onClick={() => setMobileOpen(false)}
                   className={`block px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
                     active
-                      ? "text-white bg-white/10 border-l-[3px] border-primary"
-                      : "text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/5 border-l-[3px] border-transparent"
+                      ? "text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10 border-l-[3px] border-primary"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-50 dark:hover:text-slate-200 dark:hover:bg-white/5 border-l-[3px] border-transparent"
                   }`}
                 >
                   {tab.label}
@@ -151,14 +152,14 @@ export default function NavBar() {
           </div>
 
           {/* User info + profile + logout */}
-          <div className="px-4 py-3 border-t border-white/10 flex items-center justify-between">
+          <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <UserMenu />
             <button
               onClick={() => {
                 setMobileOpen(false);
                 setConfirmLogout(true);
               }}
-              className="p-1.5 rounded-lg text-[#9ca3af] hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
+              className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all"
               aria-label="Logout"
               title="Logout"
             >
