@@ -101,7 +101,7 @@ export default function PresetsPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col items-center p-6 pt-8 gap-6">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
-        Meeting Sessions
+        Preset Sessions
       </h1>
 
       <div className="w-full max-w-lg mx-auto space-y-3">
@@ -118,10 +118,7 @@ export default function PresetsPage() {
                 key={p._id}
                 className="flex items-center justify-between gap-3 py-3 px-1 border-b border-gray-200 dark:border-slate-800"
               >
-                <button
-                  onClick={() => handleLoad(p)}
-                  className="flex-1 text-left min-w-0"
-                >
+                <div className="flex-1 min-w-0">
                   <div className="text-gray-900 dark:text-white font-medium truncate">
                     {p.name}
                   </div>
@@ -131,13 +128,15 @@ export default function PresetsPage() {
                     {formatRate(getTotalRate(p.attendees))} ·{" "}
                     {new Date(p.createdAt).toLocaleDateString()}
                   </div>
-                </button>
+                </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => handleLoad(p)}
-                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 text-white transition-colors"
+                    className="w-8 h-8 rounded-md text-gray-500 hover:text-primary hover:bg-gray-100 dark:text-slate-400 dark:hover:text-primary dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 transition-colors text-sm"
+                    aria-label={`Reuse ${p.name}`}
+                    title="Reuse"
                   >
-                    🔄 Reuse
+                    🔄
                   </button>
                   <button
                     onClick={() => setConfirmDelete(p)}

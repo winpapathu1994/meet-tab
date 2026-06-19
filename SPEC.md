@@ -1,6 +1,6 @@
 # Meeting Cost Live Counter (MeetTab) — Spec by @winpapathu1994
 
-**Repository description:** A privacy-first meeting cost timer with JWT authentication. Login to CRUD roles, manage named attendees, save/reuse meeting sessions, and share a link — no salaries exposed.
+**Repository description:** A privacy-first meeting cost timer with JWT authentication. Login to CRUD roles, manage named attendees, save/reuse preset sessions with snapshotted hourly rates, and share a link — no salaries exposed. Dark mode by default.
 
 ## Gist
 
@@ -8,7 +8,7 @@ A browser-based meeting cost counter built on Next.js with JWT authentication an
 
 ## Story
 
-Lily is a team lead at a Yangon-based software firm. Her opens MeetTab, logs in, and adds her team by name — Alice (Senior Dev), Bob (Junior Dev), Carol (Junior Dev), David (Manager), Emily (Designer). She saves this session as "Sprint Planning". The projector shows "MMK 52,400 — 18 min 32 sec" in large text. Everyone instinctively keeps it brief. Next sprint, she opens the app, logs in, opens the Sessions tab, and clicks Reuse on her saved session — names and roles are restored instantly.
+Lily is a team lead at a Yangon-based software firm. She opens MeetTab, logs in, and adds her team by name — Alice (Senior Dev), Bob (Junior Dev), Carol (Junior Dev), David (Manager), Emily (Designer). She saves this session as "Sprint Planning". The projector shows "MMK 52,400 — 18 min 32 sec" in large text. Everyone instinctively keeps it brief. Next sprint, she opens the app, logs in, opens the Preset Sessions tab, and clicks Reuse on her saved session — names, roles, and snapshotted rates are restored instantly.
 
 ## Why
 
@@ -27,9 +27,9 @@ Meetings have invisible costs. Existing tools require entering real salaries —
 |---|---|---|
 | Framework | Next.js 16 (App Router) | API routes + React frontend in one project |
 | Frontend | React 19 | Client components for interactivity |
-| Styling | Tailwind CSS 4 | Projector-readable large text |
+| Styling | Tailwind CSS 4 | Dark mode default, light/dark toggle, projector-readable large text |
 | Timer logic | `useTimer` hook | Real-time cost tick every second |
-| Attendee model | `Attendee { id, name, roleId }` | Full CRUD with inline UI, persisted to MongoDB |
+| Attendee model | `Attendee { id, name, roleId, hourlyRate }` | Full CRUD with inline UI, hourlyRate snapshotted on save, persisted to MongoDB |
 | Role model | `Role { label, hourlyRate }` | Full CRUD at `/roles`, stored in MongoDB |
 | Authentication | JWT (httpOnly cookie) | bcryptjs password hashing, 7-day token expiry |
 | Database | MongoDB / Mongoose | User, AttendeeSession, Preset, and Role collections |
@@ -63,7 +63,7 @@ Meetings have invisible costs. Existing tools require entering real salaries —
 | `/register` | Registration form (redirects to `/meet` if already logged in) | No |
 | `/meet` | Attendee CRUD + timer + save sessions + share | **Yes** |
 | `/roles` | Role CRUD (label + hourly rate) | **Yes** |
-| `/presets` | Meeting Sessions — reuse or delete saved sessions | **Yes** |
+| `/presets` | Preset Sessions — reuse or delete saved sessions | **Yes** |
 | `/api-docs` | Swagger UI interactive API documentation (dark theme) | No |
 
 ## Data Flow
@@ -72,14 +72,15 @@ Meetings have invisible costs. Existing tools require entering real salaries —
 2. User is redirected to `/meet` — auth guard checks `/api/auth/me`
 3. User can create and manage custom roles at `/roles`
 4. User adds attendees by name and assigns each a role via the modern dropdown picker
-5. Each attendee has a role with a market rate estimate
+5. Each attendee has a role with a market rate estimate; hourly rate is snapshotted
 6. User can **Save** attendees to MongoDB or load a previous session
-7. User can save meeting sessions for recurring configurations
-8. User can reuse saved sessions from the Sessions tab — names and roles restored
-9. Start is pressed — timer begins, cost updates every second
-10. `cost = (sum of all attendee role rates / 3600) x elapsedSeconds`
-11. Projector view shows total cost only — no per-person breakdown
-12. Role config + names are shareable via URL parameters
+7. User can save preset sessions for recurring configurations — hourly rates are persisted per attendee
+8. User can reuse saved sessions from the Preset Sessions tab — names, roles, and rates restored
+9. Delete actions show a confirmation dialog before removing records
+10. Start is pressed — timer begins, cost updates every second
+11. `cost = (sum of all attendee role rates / 3600) x elapsedSeconds`
+12. Projector view shows total cost only — no per-person breakdown
+13. Role config + names are shareable via URL parameters
 
 ## API Routes
 
@@ -111,14 +112,14 @@ Error responses include a `code` field for contextual UI hints (`email_not_found
 | PUT | `/api/attendees` | Yes | Save (upsert) current attendees |
 | DELETE | `/api/attendees` | Yes | Clear saved session |
 
-### Meeting Sessions
+### Preset Sessions
 
 | Method | Route | Auth | Purpose |
 |--------|-------|:---:|---------|
 | GET | `/api/presets` | Yes | List user's saved sessions |
-| POST | `/api/presets` | Yes | Create named session |
+| POST | `/api/presets` | Yes | Create named session (attendees with hourlyRate) |
 | PUT | `/api/presets/[id]` | Yes | Update session name or attendees |
-| DELETE | `/api/presets/[id]` | Yes | Delete session |
+| DELETE | `/api/presets/[id]` | Yes | Delete session (with confirmation dialog) |
 
 ## MongoDB Collections
 
@@ -126,8 +127,8 @@ Error responses include a `code` field for contextual UI hints (`email_not_found
 |-----------|--------|-------|
 | `users` | `{ email, passwordHash, name, timestamps }` | `email` unique |
 | `roles` | `{ label, hourlyRate, timestamps }` | — |
-| `attendeesessions` | `{ userId, attendees: [{name, roleId}], updatedAt }` | `userId` unique |
-| `presets` | `{ userId, name, attendees: [{name, roleId}], timestamps }` | `userId` |
+| `attendeesessions` | `{ userId, attendees: [{name, roleId, hourlyRate}], updatedAt }` | `userId` unique |
+| `presets` | `{ userId, name, attendees: [{name, roleId, hourlyRate}], timestamps }` | `userId` |
 
 ## Project Structure
 
@@ -140,7 +141,7 @@ src/
 │   ├── register/page.tsx          # Register page (/register)
 │   ├── meet/page.tsx              # Timer + attendees (/meet) — auth-gated
 │   ├── roles/page.tsx             # Role CRUD (/roles) — auth-gated
-│   ├── presets/page.tsx           # Meeting Sessions (/presets) — auth-gated
+│   ├── presets/page.tsx           # Preset Sessions (/presets) — auth-gated
 │   ├── api-docs/
 │   │   ├── page.tsx               # Swagger UI (/api-docs)
 │   │   └── swagger-dark.css       # Dark theme overrides
@@ -161,16 +162,20 @@ src/
 ├── components/
 │   ├── AttendeeManager.tsx         # Inline CRUD for named attendees
 │   ├── AttendeePersistence.tsx     # Save / Load / Clear (MongoDB)
+│   ├── ConfirmDialog.tsx           # Reusable delete confirmation modal
 │   ├── CostDisplay.tsx             # Giant cost + timer, digit-flash animation
 │   ├── CurrencyToggle.tsx          # MMK ↔ USD ↔ SGD pill toggle
-│   ├── NavBar.tsx                  # Meet / Roles / Sessions tabs + user + logout
-│   ├── Providers.tsx               # Auth context provider wrapper
+│   ├── NavBar.tsx                  # Brand left, centered tabs, user actions right + mobile drawer
+│   ├── PresetManager.tsx           # Save / Load / Delete preset sessions inline
+│   ├── Providers.tsx               # Auth + Theme context provider wrapper
 │   ├── RoleManager.tsx             # Role CRUD (label + hourly rate)
 │   ├── RoleSelect.tsx              # Modern role dropdown picker with icons + colors
 │   ├── SavePreset.tsx              # Save Session inline toggle
+│   ├── ThemeToggle.tsx             # Light/dark mode toggle (sun/moon icons)
 │   └── TimerControls.tsx           # Start/Pause/Resume/Reset/Copy Link
 ├── contexts/
-│   └── AuthContext.tsx             # useAuth() — user, login, register, logout
+│   ├── AuthContext.tsx             # useAuth() — user, login, register, logout
+│   └── ThemeContext.tsx            # Dark mode context (default dark, localStorage)
 ├── data/
 │   └── roles.ts                    # Role presets, currency rates, formatters
 ├── hooks/
@@ -208,6 +213,8 @@ src/
 - [ ] User can Reuse or Delete saved sessions from `/presets`
 - [ ] Reusing a session restores attendee names and shows the session name
 - [ ] Meeting sessions persist across sessions via MongoDB
+- [ ] Preset sessions snapshotted hourly rates survive role rate changes
+- [ ] Delete actions (roles, presets, attendees, clear) show confirmation dialog
 - [ ] Counter updates every second in real time
 - [ ] Projector view shows total cost only — no per-person breakdown visible
 - [ ] Timer supports pause, resume, and reset
@@ -215,5 +222,6 @@ src/
 - [ ] Copy Link button shows Copied! feedback
 - [ ] Display is legible on a projector (large font, high contrast)
 - [ ] Default currency is MMK with toggle to USD and SGD
-- [ ] NavBar provides Meet / Roles / Meeting Sessions tab navigation
+- [ ] Dark mode is the default; light/dark toggle persists via localStorage
+- [ ] NavBar provides brand + centered Meet / Roles / Preset Sessions tabs + responsive mobile drawer
 - [ ] Works correctly on mobile browsers

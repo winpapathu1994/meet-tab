@@ -1,15 +1,15 @@
 # MeetTab
 
-> A privacy-first meeting cost timer with JWT authentication and MongoDB. Login to CRUD roles, manage named attendees, save meeting sessions, share a link, hit start.
+> A privacy-first meeting cost timer with JWT authentication and MongoDB. Login to CRUD roles, manage named attendees, save preset sessions, share a link, hit start. Dark mode by default.
 
-MeetTab shows the real-time cost of your meeting on a projector — using Myanmar market role presets instead of anyone's actual salary. Roles are fully customizable via the `/roles` page and stored in MongoDB.
+MeetTab shows the real-time cost of your meeting on a projector — using Myanmar market role presets instead of anyone's actual salary. Roles are fully customizable via the `/roles` page and stored in MongoDB. Hourly rates are snapshotted when you save a session so totals don't drift even if role rates change later.
 
 ## How it works
 
 1. **Login** — JWT authentication at the landing page (or register a new account)
-2. **Manage Roles** — visit the Roles tab to create/edit/delete roles with custom labels and hourly rates
-3. **Name your attendees** — add team members by name, assign each a role via the modern picker
-4. **Save & Reuse** — persist attendee lists as meeting sessions to MongoDB; reuse them from the Sessions tab
+2. **Manage Roles** — visit the Roles tab to create/edit/delete roles with custom labels and hourly rates. Delete is confirmed with a dialog.
+3. **Name your attendees** — add team members by name, assign each a role via the modern picker. Remove with confirmation.
+4. **Save & Reuse** — persist attendee lists as preset sessions to MongoDB with snapshotted hourly rates; reuse them from the Preset Sessions tab
 5. **Start the meeting** — a live cost counter ticks up every second
 6. **Project it** — giant text on a dark background, readable from across the room
 7. **Share the link** — URL encodes the role config and attendee names so anyone with an account can open it
@@ -69,7 +69,7 @@ Interactive Swagger UI available at **http://localhost:3000/api-docs** (no link 
 | `/register` | Registration form (redirects if logged in)     | No  |
 | `/meet`     | Attendee CRUD, timer, save sessions, share    | Yes  |
 | `/roles`    | Role CRUD (custom labels + hourly rates)       | Yes  |
-| `/presets`  | Meeting Sessions — Reuse or Delete             | Yes  |
+| `/presets`  | Preset Sessions — Reuse or Delete             | Yes  |
 | `/api-docs` | Swagger UI interactive API documentation       | No  |
 
 ## Tech stack
@@ -78,9 +78,9 @@ Interactive Swagger UI available at **http://localhost:3000/api-docs** (no link 
 | -------------- | ------------------------------ |
 | Framework      | Next.js 16 (App Router)        |
 | Language       | TypeScript 5.8                 |
-| Styling        | Tailwind CSS 4                 |
-| Auth           | JWT (httpOnly cookie, bcryptjs)|
-| Database       | MongoDB / Mongoose             |
+| Styling        | Tailwind CSS 4, dark mode default |
+| Auth           | JWT (httpOnly cookie, bcryptjs)  |
+| Database       | MongoDB / Mongoose               |
 | API docs       | OpenAPI 3.0 + Swagger UI       |
 | Sharing        | URL query params               |
 
@@ -95,7 +95,7 @@ src/
 │   ├── register/page.tsx          # Register page (/register)
 │   ├── meet/page.tsx              # Timer + attendees (/meet)
 │   ├── roles/page.tsx             # Role CRUD (/roles)
-│   ├── presets/page.tsx           # Meeting Sessions (/presets)
+│   ├── presets/page.tsx           # Preset Sessions (/presets)
 │   ├── api-docs/                  # Swagger UI page (/api-docs)
 │   │   ├── page.tsx               # Client-side Swagger UI renderer
 │   │   └── swagger-dark.css       # Dark theme overrides
@@ -103,21 +103,25 @@ src/
 │       ├── docs/route.ts          # OpenAPI 3.0 JSON spec (/api/docs)
 │       ├── auth/                  # register, login, me, logout
 │       ├── attendees/             # session persistence (save/load/clear)
-│       ├── presets/               # meeting session CRUD
+│       ├── presets/               # preset session CRUD
 │       └── roles/                 # role CRUD
 ├── components/
 │   ├── AttendeeManager.tsx         # Inline CRUD for named attendees
 │   ├── AttendeePersistence.tsx     # Save / Load / Clear buttons
+│   ├── ConfirmDialog.tsx           # Reusable delete confirmation modal
 │   ├── CostDisplay.tsx             # Giant cost + elapsed time
 │   ├── CurrencyToggle.tsx          # MMK ↔ USD ↔ SGD
-│   ├── NavBar.tsx                  # Meet / Roles / Sessions tabs + user + logout
-│   ├── Providers.tsx               # Auth context wrapper
+│   ├── NavBar.tsx                  # Brand, centered tabs, user actions + mobile drawer
+│   ├── PresetManager.tsx           # Save / Load / Delete preset sessions inline
+│   ├── Providers.tsx               # Auth + Theme context wrapper
 │   ├── RoleManager.tsx             # Role CRUD (label + hourly rate)
 │   ├── RoleSelect.tsx              # Modern role dropdown picker
 │   ├── SavePreset.tsx              # Inline save-session toggle
+│   ├── ThemeToggle.tsx             # Light/dark mode toggle (sun/moon icons)
 │   └── TimerControls.tsx           # Start / Pause / Resume / Reset / Copy Link
 ├── contexts/
-│   └── AuthContext.tsx             # useAuth() hook
+│   ├── AuthContext.tsx             # useAuth() hook
+│   └── ThemeContext.tsx            # Dark mode (default dark) with localStorage
 ├── data/
 │   └── roles.ts                    # Role presets, currency rates, formatters
 ├── hooks/
@@ -170,7 +174,7 @@ Login errors include a `code` field (`email_not_found`, `invalid_password`) for 
 | PUT    | `/api/attendees`  | `{ attendees: [...] }`      | `{ attendees: [...] }`    |
 | DELETE | `/api/attendees`  | —                           | `{ ok: true }`            |
 
-### Meeting Sessions (auth required)
+### Preset Sessions (auth required)
 
 | Method | Route                | Body                          | Response       |
 | ------ | -------------------- | ----------------------------- | -------------- |
@@ -213,6 +217,8 @@ Role selections and attendee names are encoded as query parameters:
 ```
 
 Open that URL on any device (after logging in) and the role config loads automatically. Press **📋 Copy Link** during a meeting to grab the shareable URL.
+
+Each attendee stores the `hourlyRate` at save time, so preset sessions display snapshotted rates — not live role rates that may have changed.
 
 ## Environment variables
 
