@@ -34,23 +34,45 @@ Try it out! Register an account or use a share link to view in read-only mode.
 
 <div align="center">
 
-### 🔐 Login Page
-![Login Page](public/screenshots/ss1.png)
-
-### 👥 Meeting Setup - Attendee Management
-![Meeting Setup](public/screenshots/ss2.png)
-
-### ⏱️ Live Meeting Timer - Projector View
-![Live Timer](public/screenshots/ss3.png)
-
-### 📊 Role Management
-![Role Management](public/screenshots/ss4.png)
-
-### 💾 Preset Sessions
-![Preset Sessions](public/screenshots/ss5.png)
-
-### 📜 Session History
-![Session History](public/screenshots/ss6.png)
+<table>
+<tr>
+<td width="50%" align="center">
+<h3>🔐 Login Page</h3>
+<img src="public/screenshots/01.png" alt="Login Page" />
+</td>
+<td width="50%" align="center">
+<h3>👥 Meeting Setup</h3>
+<img src="public/screenshots/02.png" alt="Meeting Setup" />
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<h3>⏱️ Live Meeting Timer</h3>
+<img src="public/screenshots/03.png" alt="Live Timer" />
+</td>
+<td width="50%" align="center">
+<h3>📊 Role Management</h3>
+<img src="public/screenshots/04.png" alt="Role Management" />
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<h3>💾 Preset Sessions</h3>
+<img src="public/screenshots/05.png" alt="Preset Sessions" />
+</td>
+<td width="50%" align="center">
+<h3>📜 Session History</h3>
+<img src="public/screenshots/06.png" alt="Session History" />
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<h3>🔗 Shared Link</h3>
+<img src="public/screenshots/07.png" alt="Shared Link" />
+</td>
+<td width="50%"></td>
+</tr>
+</table>
 
 </div>
 

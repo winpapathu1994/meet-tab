@@ -183,10 +183,10 @@ export default function UserMenu() {
 
           {/* Avatar section */}
           <div className="flex items-center gap-4 mb-4">
-            <div
+            {/* <div
               className="relative group cursor-pointer shrink-0"
               onClick={() => fileRef.current?.click()}
-            >
+            > */}
               {avatarUrl ? (
                 <img
                   src={avatarUrl}
@@ -205,7 +205,7 @@ export default function UserMenu() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-            </div>
+            {/* </div> */}
             <div>
               <button
                 onClick={() => fileRef.current?.click()}
