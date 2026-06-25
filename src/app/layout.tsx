@@ -23,7 +23,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-gray-50 dark:bg-slate-900 pt-12">
+      <body className="bg-gray-50 dark:bg-slate-900 pt-14">
         <Providers>
           <NavBar />
           {children}

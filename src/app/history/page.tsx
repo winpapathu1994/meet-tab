@@ -128,11 +128,11 @@ export default function HistoryPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-12 pb-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-12">
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* ── Header ── */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
             Session History
           </h1>
           <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">

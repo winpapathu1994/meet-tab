@@ -141,7 +141,7 @@ export default function MeetPage() {
   const readOnly = isGuest;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-10">
       {isIdle ? (
         /* ────────────────────────────────── *
          *         SETUP VIEW (idle)           *
@@ -149,8 +149,9 @@ export default function MeetPage() {
         <div className="flex flex-col items-center gap-8 w-full max-w-lg">
           {/* Header */}
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
-              MeetTab
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">Meet</span>
+              <span className="font-light tracking-tighter">Tab</span>
             </h1>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               Track meeting costs in real time

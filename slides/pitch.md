@@ -78,8 +78,9 @@ Engineering managers, team leads, and project managers who run frequent meetings
 
 | Layer | Stack |
 |-------|-------|
-| **Frontend** | Next.js 16 · React 19 · Tailwind CSS 4 |
-| **Backend** | API Routes · MongoDB · Mongoose 9 |
+| **Frontend** |  React 19 · Tailwind CSS 4 |
+| **Backend** | Next.js 16 · API Routes |
+| **Database** | MongoDB · Mongoose 9 |
 | **Auth** | JWT cookies · bcryptjs · httpOnly |
 
 - **MCP**: Context7 — documentation lookups during development
