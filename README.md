@@ -38,37 +38,37 @@ Try it out! Register an account or use a share link to view in read-only mode.
 <tr>
 <td width="50%" align="center">
 <h3>🔐 Login Page</h3>
-<img src="public/screenshots/01.png" alt="Login Page" />
+<img src="screenshots/01.png" alt="Login Page" />
 </td>
 <td width="50%" align="center">
 <h3>👥 Meeting Setup</h3>
-<img src="public/screenshots/02.png" alt="Meeting Setup" />
+<img src="screenshots/02.png" alt="Meeting Setup" />
 </td>
 </tr>
 <tr>
 <td width="50%" align="center">
 <h3>⏱️ Live Meeting Timer</h3>
-<img src="public/screenshots/03.png" alt="Live Timer" />
+<img src="screenshots/03.png" alt="Live Timer" />
 </td>
 <td width="50%" align="center">
 <h3>📊 Role Management</h3>
-<img src="public/screenshots/04.png" alt="Role Management" />
+<img src="screenshots/04.png" alt="Role Management" />
 </td>
 </tr>
 <tr>
 <td width="50%" align="center">
 <h3>💾 Preset Sessions</h3>
-<img src="public/screenshots/05.png" alt="Preset Sessions" />
+<img src="screenshots/05.png" alt="Preset Sessions" />
 </td>
 <td width="50%" align="center">
 <h3>📜 Session History</h3>
-<img src="public/screenshots/06.png" alt="Session History" />
+<img src="screenshots/06.png" alt="Session History" />
 </td>
 </tr>
 <tr>
 <td width="50%" align="center">
 <h3>🔗 Shared Link</h3>
-<img src="public/screenshots/07.png" alt="Shared Link" />
+<img src="screenshots/07.png" alt="Shared Link" />
 </td>
 <td width="50%"></td>
 </tr>

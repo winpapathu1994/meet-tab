@@ -97,25 +97,25 @@ Stack: **Next.js 16 · React 19 · TypeScript 5.8 · Tailwind 4 · MongoDB 9** �
 <div align="center">
 
 ### 🔐 Login Page
-![screenshot 1 — Login Page](/public/screenshots/01.png)
+![screenshot 1 — Login Page](/screenshots/01.png)
 
 ### 👥 Meeting Setup - Attendee Management
-![screenshot 2 — Meeting Setup](/public/screenshots/02.png)
+![screenshot 2 — Meeting Setup](/screenshots/02.png)
 
 ### ⏱️ Live Meeting Timer - Projector View
-![screenshot 3 — Live Timer](/public/screenshots/03.png)
+![screenshot 3 — Live Timer](/screenshots/03.png)
 
 ### 📊 Role Management
-![screenshot 4 — Role Management](/public/screenshots/04.png)
+![screenshot 4 — Role Management](/screenshots/04.png)
 
 ### 💾 Preset Sessions
-![screenshot 5 — Preset Sessions](/public/screenshots/05.png)
+![screenshot 5 — Preset Sessions](/screenshots/05.png)
 
 ### 📜 Session History
-![screenshot 6 - Session History](/public/screenshots/06.png)
+![screenshot 6 - Session History](/screenshots/06.png)
 
 ### 🔗  Shared Link
-![screenshot 7 - Shared Link](/public/screenshots/07.png)
+![screenshot 7 - Shared Link](/screenshots/07.png)
 
 
 </div>
