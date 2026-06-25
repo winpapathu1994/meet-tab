@@ -37,27 +37,27 @@ export default function NavBar() {
 
   return (
     <nav className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 z-30 shadow-sm dark:shadow-none">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-12">
+      <div className="max-w-3xl mx-auto flex items-center px-4 h-14">
         {/* ── Left: Brand ── */}
         <Link
           href="/meet"
           className="hover:opacity-80 transition-opacity shrink-0"
         >
-          <span className="text-slate-900 dark:text-white font-bold text-lg tracking-tight hidden sm:inline">
+          <span className="text-slate-900 dark:text-white font-bold text-xl tracking-tight">
             <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">Meet</span>
             <span className="font-light tracking-tighter">Tab</span>
           </span>
         </Link>
 
         {/* ── Center: Nav tabs (desktop) ── */}
-        <div className="hidden md:flex items-center h-full absolute left-1/2 -translate-x-1/2">
+        <div className="hidden md:flex items-center h-full flex-1 justify-center">
           {TABS.map((tab) => {
             const active = pathname.startsWith(tab.href);
             return (
               <Link
                 key={tab.href}
                 href={tab.href}
-                className={`relative flex items-center h-full px-4 text-sm font-medium transition-colors ${
+                className={`relative flex items-center h-full px-4 text-base font-medium transition-colors ${
                   active
                     ? "text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10"
                     : "text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-50 dark:hover:text-slate-200 dark:hover:bg-white/5"
@@ -74,7 +74,7 @@ export default function NavBar() {
         </div>
 
         {/* ── Right: User actions (desktop) + hamburger (mobile) ── */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 shrink-0 ml-auto">
           {/* Desktop user area */}
           <div className="hidden md:flex items-center gap-2">
             <ThemeToggle />
@@ -123,7 +123,7 @@ export default function NavBar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
           {/* Nav links */}
-          <div className="px-2 py-1">
+          <div className="max-w-3xl mx-auto px-4 py-1">
             {TABS.map((tab) => {
               const active = pathname.startsWith(tab.href);
               return (
@@ -131,7 +131,7 @@ export default function NavBar() {
                   key={tab.href}
                   href={tab.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                  className={`block px-3 py-2.5 rounded-md text-base font-medium transition-colors ${
                     active
                       ? "text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10 border-l-[3px] border-primary"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-50 dark:hover:text-slate-200 dark:hover:bg-white/5 border-l-[3px] border-transparent"
@@ -144,7 +144,7 @@ export default function NavBar() {
           </div>
 
           {/* User info + profile + logout */}
-          <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="max-w-3xl mx-auto px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <UserMenu />
             <button
               onClick={() => {
