@@ -151,7 +151,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={handleSave}
           disabled={saving || !hasAttendees}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 hover:text-primary dark:hover:text-primary text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
+          className="group flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-emerald-200/60 dark:border-emerald-500/20 bg-emerald-50/80 dark:bg-emerald-500/10 backdrop-blur-sm text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 shadow-sm shadow-emerald-500/10 hover:shadow-md transition-all duration-200 text-sm font-medium"
           title={hasAttendees ? "Save attendees to database" : "No attendees to save"}
         >
           {saving ? (
@@ -167,14 +167,14 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={handleLoad}
           disabled={loading || !hasSavedData}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 hover:text-primary dark:hover:text-primary text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
+          className="group flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-blue-200/60 dark:border-blue-500/20 bg-blue-50/80 dark:bg-blue-500/10 backdrop-blur-sm text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/20 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 shadow-sm shadow-blue-500/10 hover:shadow-md transition-all duration-200 text-sm font-medium"
           title={hasSavedData ? "Load saved attendees" : "No saved data"}
         >
           {loading ? (
             <div className="w-4 h-4 border-2 border-gray-300 border-t-primary rounded-full animate-spin" />
           ) : (
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           )}
           {loading ? "Loading…" : "Load"}
@@ -183,7 +183,7 @@ export default function AttendeePersistence({ attendees, onLoad }: Props) {
         <button
           onClick={() => setConfirmClear(true)}
           disabled={clearing || !hasSavedData}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-danger/40 dark:hover:border-danger/40 hover:text-danger dark:hover:text-danger text-gray-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium"
+          className="group flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-red-200/60 dark:border-red-500/20 bg-red-50/80 dark:bg-red-500/10 backdrop-blur-sm text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 shadow-sm shadow-red-500/10 hover:shadow-md transition-all duration-200 text-sm font-medium"
           title={hasSavedData ? "Delete saved data" : "Nothing to clear"}
         >
           {clearing ? (

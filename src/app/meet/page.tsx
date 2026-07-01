@@ -91,6 +91,16 @@ export default function MeetPage() {
         year: "numeric",
       })}`;
 
+    // Resolve hourlyRate for each attendee — stored rate takes priority,
+    // then fall back to API roles and static ROLES lookup
+    function resolveRate(a: { roleId: string; hourlyRate: number }): number {
+      if (a.hourlyRate > 0) return a.hourlyRate;
+      const apiRole = apiRoles.find((r) => r._id === a.roleId);
+      if (apiRole) return apiRole.hourlyRate;
+      const stRole = ROLES.find((r) => r.id === a.roleId);
+      return stRole?.hourlyRate ?? 0;
+    }
+
     try {
       await fetch("/api/sessions", {
         method: "POST",
@@ -100,7 +110,7 @@ export default function MeetPage() {
           attendees: attendees.map((a) => ({
             name: a.name || "Unnamed",
             roleId: a.roleId,
-            hourlyRate: a.hourlyRate,
+            hourlyRate: resolveRate(a),
           })),
           totalCostMMK: Math.round(totalCostMMK),
           elapsedSeconds: elapsed,
@@ -123,6 +133,7 @@ export default function MeetPage() {
     currency,
     reset,
     router,
+    apiRoles,
   ]);
 
   // Loading spinner while auth resolves

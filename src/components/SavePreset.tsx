@@ -70,7 +70,7 @@ export default function SavePreset({ attendees }: Props) {
         <button
           onClick={() => setOpen(true)}
           disabled={!hasAttendees}
-          className="w-full py-3 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/40 dark:hover:text-primary dark:hover:border-primary/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium flex items-center justify-center gap-2 group"
+          className="group w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:text-amber-600 dark:hover:text-amber-400 hover:border-amber-300/60 dark:hover:border-amber-500/40 hover:bg-amber-50/50 dark:hover:bg-amber-500/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2"
         >
           <svg
             className="h-4 w-4 transition-transform group-hover:scale-110"
@@ -84,7 +84,7 @@ export default function SavePreset({ attendees }: Props) {
           Save as Preset
         </button>
       ) : (
-        <div className="flex gap-2 p-1 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+        <div className="flex gap-2 p-1.5 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
           <input
             autoFocus
             type="text"
@@ -103,7 +103,7 @@ export default function SavePreset({ attendees }: Props) {
           <button
             onClick={handleSave}
             disabled={!name.trim() || saving || !hasAttendees}
-            className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-medium shadow-sm shadow-amber-500/20 hover:shadow-md hover:shadow-amber-500/25 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500/50 transition-all duration-200 flex items-center gap-1.5"
           >
             {saving ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -119,7 +119,7 @@ export default function SavePreset({ attendees }: Props) {
               setOpen(false);
               setName("");
             }}
-            className="px-3 py-2 rounded-lg text-sm font-medium text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 transition-colors"
+            className="px-3 py-2 rounded-xl text-sm font-medium text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-500/50 transition-all duration-200"
           >
             Cancel
           </button>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRoles } from "@/hooks/useRoles";
 import ConfirmDialog from "@/components/ConfirmDialog";
-import { formatCost, type Currency, CURRENCY_SYMBOLS, ROLES } from "@/data/roles";
+import { formatCost, convertCurrency, type Currency, CURRENCY_SYMBOLS, ROLES } from "@/data/roles";
 
 interface SessionAttendee {
   name: string;
@@ -288,8 +288,11 @@ export default function HistoryPage() {
                                   {a.name || "Unnamed"}
                                 </p>
                                 <p className="text-xs text-gray-500 dark:text-slate-400">
-                                  {roleLabel(a.roleId)} · {CURRENCY_SYMBOLS["MMK"]}{" "}
-                                  {a.hourlyRate.toLocaleString("en-US")}/hr
+                                  {roleLabel(a.roleId)} · {CURRENCY_SYMBOLS[session.currency]}{" "}
+                                  {session.currency === "MMK"
+                                    ? a.hourlyRate.toLocaleString("en-US")
+                                    : convertCurrency(a.hourlyRate, session.currency).toFixed(2)
+                                  }/hr
                                 </p>
                               </div>
                               {session.elapsedSeconds > 0 && (
@@ -325,7 +328,7 @@ export default function HistoryPage() {
                             e.stopPropagation();
                             setDeleteId(session._id);
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 dark:text-slate-500 hover:text-danger hover:bg-danger/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger/50"
+                          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-2xl border border-red-200/60 dark:border-red-500/20 bg-red-50/80 dark:bg-red-500/10 backdrop-blur-sm text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 hover:-translate-y-0.5 active:translate-y-0 shadow-sm shadow-red-500/10 hover:shadow-md transition-all duration-200 text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50"
                         >
                           <svg
                             className="h-3.5 w-3.5"
