@@ -123,7 +123,7 @@ export default function AttendeeManager({
               /* ── Edit row ── */
               <li
                 key={a.id}
-                className="flex flex-col gap-2 p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600"
+                className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm"
               >
                 <div className="flex gap-2 items-stretch">
                   <input
@@ -133,7 +133,7 @@ export default function AttendeeManager({
                     onChange={(e) => setFormName(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Name"
-                    className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
+                    className="flex-1 h-[42px] px-3 rounded-xl bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                   />
                   <RoleSelect
                     roles={apiRoles}
@@ -146,14 +146,14 @@ export default function AttendeeManager({
                 <div className="flex gap-2 justify-end">
                   <button
                     onClick={cancel}
-                    className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
+                    className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-500/50 shadow-sm hover:shadow-md transition-all duration-200"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={!formName.trim()}
-                    className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
+                    className="px-5 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 transition-all duration-200"
                   >
                     Save
                   </button>
@@ -163,7 +163,7 @@ export default function AttendeeManager({
               /* ── Display row ── */
               <li
                 key={a.id}
-                className="flex items-center justify-between gap-3 py-2.5 px-1 border-b border-gray-200 dark:border-slate-800"
+                className="group flex items-center justify-between gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50/80 dark:hover:bg-slate-800/50 border-b border-gray-100 dark:border-slate-800/50"
               >
                 <div className="flex-1 min-w-0">
                   <div className="text-gray-900 dark:text-white font-medium truncate">
@@ -177,22 +177,26 @@ export default function AttendeeManager({
                   </div>
                 </div>
                 {!readOnly && (
-                  <div className="flex items-center gap-1 shrink-0">
+                  <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
                     <button
                       onClick={() => openEdit(a)}
-                      className="w-8 h-8 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 transition-colors text-sm"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 transition-all duration-200"
                       aria-label={`Edit ${a.name || "unnamed attendee"}`}
                       title="Edit"
                     >
-                      ✏️
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
                     </button>
                     <button
                       onClick={() => setConfirmDelete(a)}
-                      className="w-8 h-8 rounded-md text-gray-500 hover:text-danger hover:bg-gray-100 dark:text-slate-400 dark:hover:text-danger dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-colors text-sm"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-danger hover:bg-danger/10 dark:hover:bg-danger/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 transition-all duration-200"
                       aria-label={`Remove ${a.name || "unnamed attendee"}`}
                       title="Remove"
                     >
-                      🗑️
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
                     </button>
                   </div>
                 )}
@@ -204,7 +208,7 @@ export default function AttendeeManager({
 
       {/* ── Add form ── */}
       {adding && (
-        <div className="flex flex-col gap-2 p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600">
+        <div className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm">
           <div className="flex gap-2 items-stretch">
             <input
               autoFocus
@@ -226,14 +230,14 @@ export default function AttendeeManager({
           <div className="flex gap-2 justify-end">
             <button
               onClick={cancel}
-              className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
+              className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-500/50 shadow-sm hover:shadow-md transition-all duration-200"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={!formName.trim()}
-              className="px-4 py-1.5 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
+              className="px-5 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 transition-all duration-200"
             >
               Add
             </button>
@@ -245,15 +249,18 @@ export default function AttendeeManager({
       {!readOnly && !isFormOpen && (
         <button
           onClick={openAdd}
-          className="w-full py-2.5 rounded-lg border-2 border-dashed border-gray-300 dark:border-slate-600 text-gray-500 dark:text-slate-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-slate-500 transition-colors text-sm font-medium"
+          className="group w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:text-primary hover:border-primary/40 dark:hover:text-primary dark:hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-primary/5 transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2"
         >
-          + Add Attendee
+          <svg className="h-4 w-4 transition-transform group-hover:rotate-90 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          Add Attendee
         </button>
       )}
 
       {/* ── Footer ── */}
       {attendees.length > 0 && (
-        <div className="pt-3 text-right text-gray-500 dark:text-slate-400 text-sm border-t border-gray-300 dark:border-slate-700">
+        <div className="pt-3 text-right text-gray-500 dark:text-slate-400 text-sm border-t border-gray-100 dark:border-slate-800/50">
           {attendees.length}{" "}
           {attendees.length === 1 ? "person" : "people"} ·{" "}
           <span className="text-gray-900 dark:text-white font-semibold">

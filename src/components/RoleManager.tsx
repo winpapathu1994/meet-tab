@@ -392,10 +392,10 @@ export default function RoleManager() {
           {user && !isFormOpen && (
             <button
               onClick={openAdd}
-              className="w-full group py-4 rounded-2xl border-2 border-dashed border-gray-300 dark:border-slate-600 text-gray-400 dark:text-slate-500 hover:border-primary/40 hover:text-primary dark:hover:border-primary/40 dark:hover:text-primary transition-all text-sm font-medium flex items-center justify-center gap-2"
+              className="group w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:text-primary hover:border-primary/40 dark:hover:text-primary dark:hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-primary/5 transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2"
             >
               <svg
-                className="h-5 w-5 transition-transform group-hover:scale-110"
+                className="h-4 w-4 transition-transform group-hover:rotate-90 duration-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
