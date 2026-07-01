@@ -10,7 +10,7 @@ export async function PUT(request: Request) {
       return jsonResponse({ error: "Unauthorized" }, 401);
     }
 
-    const { name, currentPassword, newPassword } = await request.json();
+    const { name, currentPassword, newPassword, confirmPassword } = await request.json();
 
     await connectDB();
 
@@ -19,13 +19,16 @@ export async function PUT(request: Request) {
       return jsonResponse({ error: "User not found" }, 404);
     }
 
-    // Update name if provided
-    if (name !== undefined && name.trim()) {
+    // Update name (required, always present from frontend)
+    if (typeof name === "string" && name.trim()) {
       user.name = name.trim();
     }
 
     // Update password if both current and new are provided
     if (currentPassword && newPassword) {
+      if (newPassword !== confirmPassword) {
+        return jsonResponse({ error: "Passwords do not match" }, 400);
+      }
       const valid = await verifyPassword(currentPassword, user.passwordHash);
       if (!valid) {
         return jsonResponse({ error: "Current password is incorrect", code: "invalid_password" }, 400);

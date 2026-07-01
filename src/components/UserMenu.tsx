@@ -81,6 +81,28 @@ export default function UserMenu() {
       return;
     }
 
+    // Determine if user intends to change password (any password field has input)
+    const wantsPasswordChange = showPassword && (currentPassword || newPassword || confirmPassword);
+
+    // Validate password fields if user started filling them
+    if (wantsPasswordChange) {
+      if (!currentPassword) {
+        setError("Current password is required");
+        setSaving(false);
+        return;
+      }
+      if (newPassword.length < 6) {
+        setError("New password must be at least 6 characters");
+        setSaving(false);
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setError("Passwords do not match");
+        setSaving(false);
+        return;
+      }
+    }
+
     try {
       // Upload avatar if changed
       if (avatarPreview && fileRef.current?.files?.[0]) {
@@ -96,39 +118,35 @@ export default function UserMenu() {
         updateUser({ image: data.image });
       }
 
-      // Update name + password
-      const body: Record<string, string> = {};
-      if (trimmed !== user.name) body.name = trimmed;
-      if (showPassword && currentPassword && newPassword) {
+      // Build body — always include name, add passwords if user wants to change them
+      const body: Record<string, string> = { name: trimmed };
+      if (wantsPasswordChange) {
         body.currentPassword = currentPassword;
         body.newPassword = newPassword;
+        body.confirmPassword = confirmPassword;
       }
 
-      if (Object.keys(body).length > 0 || avatarPreview) {
-        const res = await fetch("/api/auth/profile", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setError(data.error ?? "Failed to update profile");
-          setSaving(false);
-          return;
-        }
-        if (data.user) updateUser({ name: data.user.name });
+      const res = await fetch("/api/auth/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error ?? "Failed to update profile");
+        setSaving(false);
+        return;
       }
+      if (data.user) updateUser({ name: data.user.name });
 
-      setSuccess("Profile updated");
-      setTimeout(() => {
-        setOpen(false);
-      }, 1000);
+      // Close modal on success
+      setOpen(false);
     } catch {
       setError("Something went wrong");
     } finally {
       setSaving(false);
     }
-  }, [user, name, avatarPreview, showPassword, currentPassword, newPassword, updateUser]);
+  }, [user, name, avatarPreview, showPassword, currentPassword, newPassword, confirmPassword, updateUser]);
 
   if (!user) return null;
 
@@ -183,10 +201,6 @@ export default function UserMenu() {
 
           {/* Avatar section */}
           <div className="flex items-center gap-4 mb-4">
-            {/* <div
-              className="relative group cursor-pointer shrink-0"
-              onClick={() => fileRef.current?.click()}
-            > */}
               {avatarUrl ? (
                 <img
                   src={avatarUrl}
@@ -198,20 +212,13 @@ export default function UserMenu() {
                   {user.name?.charAt(0).toUpperCase() ?? "?"}
                 </div>
               )}
-              {/* Overlay */}
-              <div className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-            {/* </div> */}
             <div>
               <button
-                onClick={() => fileRef.current?.click()}
+                // onClick={() => fileRef.current?.click()}
                 className="text-sm text-primary hover:text-primary-hover transition-colors font-medium"
               >
-                Change Photo
+                {/* Change */}
+                 Photo
               </button>
               {avatarPreview && (
                 <button
@@ -277,6 +284,7 @@ export default function UserMenu() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="New password (min 6 chars)"
+                minLength={6}
                 className="w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
               />
               <input
@@ -306,11 +314,7 @@ export default function UserMenu() {
             </button>
             <button
               onClick={handleSave}
-              disabled={
-                saving ||
-                !name.trim() ||
-                (showPassword && !!newPassword && newPassword !== confirmPassword)
-              }
+              disabled={saving || !name.trim()}
               className="px-4 py-2 rounded-md text-sm font-medium bg-primary hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors"
             >
               {saving ? "…" : "Save"}
