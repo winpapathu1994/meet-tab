@@ -32,8 +32,8 @@ export default function NavBar() {
     router.push("/");
   }, [logout, router]);
 
-  // Don't show on API docs page, while loading, or when logged out
-  if (pathname.startsWith("/api-docs") || loading || !user) return null;
+  // Don't show on API docs, login, register pages, while loading, or when logged out
+  if (pathname.startsWith("/api-docs") || pathname === "/" || pathname === "/register" || loading || !user) return null;
 
   return (
     <nav className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 z-30 shadow-sm dark:shadow-none">

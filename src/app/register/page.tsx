@@ -25,7 +25,7 @@ export default function RegisterPage() {
   // Show spinner while checking session
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+      <div className="h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-slate-200 dark:border-slate-700 border-t-primary rounded-full animate-spin" />
       </div>
     );
@@ -50,7 +50,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 sm:p-6 gap-8">
+    <div className="h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 sm:p-6 gap-8">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
           <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">Meet</span>
