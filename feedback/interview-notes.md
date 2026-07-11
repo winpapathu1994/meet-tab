@@ -40,7 +40,7 @@
 
 ## What I'll change (next steps)
 
-- [ ] Prevent attendee cards from overflowing and optimize the timer view for mobile devices.
-- [ ] Add CSV/PDF export to the History page
-- [ ] Add first-time user onboarding (tooltip walkthrough or empty-state guidance)
-- [ ] Consider per-role cost breakdown in projector view (low priority — only if projector UX stays clean)
+- [x] Prevent attendee cards from overflowing and optimize the timer view for mobile devices. — **Fixed with Claude Code agent**
+- [x] Add CSV/PDF export to the History page — **Fixed with Claude Code agent**
+- [x] Add first-time user onboarding (tooltip walkthrough or empty-state guidance) — **Fixed with Claude Code agent**
+- [x] Consider per-role cost breakdown in projector view — **Fixed with Claude Code agent**

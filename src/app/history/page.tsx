@@ -77,6 +77,48 @@ export default function HistoryPage() {
     [apiRoles],
   );
 
+  /** Generate and download CSV from session history */
+  const handleExportCSV = useCallback(() => {
+    if (sessions.length === 0) return;
+
+    const rows: string[] = [];
+    // Header
+    rows.push("Date,Session Name,Duration,Attendee,Role,Hourly Rate,Cost,Total Cost,Currency");
+
+    for (const session of sessions) {
+      const date = new Date(session.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+      const duration = formatDuration(session.elapsedSeconds);
+      const totalCost = formatCost(session.totalCostMMK, session.currency);
+
+      if (session.attendees.length === 0) {
+        rows.push(`"${date}","${session.sessionName}","${duration}","","","","","${totalCost}","${session.currency}"`);
+      } else {
+        for (const a of session.attendees) {
+          const role = roleLabel(a.roleId);
+          const cost = session.elapsedSeconds > 0
+            ? formatCost(a.hourlyRate * (session.elapsedSeconds / 3600), session.currency)
+            : "0";
+          rows.push(`"${date}","${session.sessionName}","${duration}","${a.name || "Unnamed"}","${role}","${a.hourlyRate}","${cost}","${totalCost}","${session.currency}"`);
+        }
+      }
+    }
+
+    const csv = rows.join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `meet-tab-history-${new Date().toISOString().split("T")[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }, [sessions, roleLabel]);
+
   // Auth guard
   useEffect(() => {
     if (!loading && !user) {
@@ -131,13 +173,26 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-12">
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* ── Header ── */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-            Session History
-          </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
-            {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded
-          </p>
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+              Session History
+            </h1>
+            <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+              {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded
+            </p>
+          </div>
+          {!fetching && sessions.length > 0 && (
+            <button
+              onClick={handleExportCSV}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-emerald-200/60 dark:border-emerald-500/20 bg-emerald-50/80 dark:bg-emerald-500/10 backdrop-blur-sm text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 hover:-translate-y-0.5 active:translate-y-0 shadow-sm shadow-emerald-500/10 hover:shadow-md transition-all duration-200 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500/50"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export CSV
+            </button>
+          )}
         </div>
 
         {/* ── Loading skeleton ── */}
@@ -206,10 +261,10 @@ export default function HistoryPage() {
                   {/* ── Card header (always visible) ── */}
                   <button
                     onClick={() => toggleExpand(session._id)}
-                    className="w-full text-left p-5 flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 rounded-2xl"
+                    className="w-full text-left p-4 sm:p-5 flex items-center gap-3 sm:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 rounded-2xl"
                   >
                     {/* Date badge */}
-                    <div className="shrink-0 w-14 h-14 rounded-xl bg-gray-100 dark:bg-slate-700/50 flex flex-col items-center justify-center">
+                    <div className="shrink-0 w-14 h-14 rounded-xl bg-gray-100 dark:bg-slate-700/50 flex-col items-center justify-center hidden sm:flex">
                       <span className="text-[10px] font-semibold uppercase text-gray-500 dark:text-slate-400 leading-none">
                         {new Date(session.createdAt).toLocaleDateString(
                           "en-US",

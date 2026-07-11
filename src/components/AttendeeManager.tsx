@@ -125,7 +125,7 @@ export default function AttendeeManager({
                 key={a.id}
                 className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm"
               >
-                <div className="flex gap-2 items-stretch">
+                <div className="flex flex-col sm:flex-row gap-2 items-stretch">
                   <input
                     autoFocus
                     type="text"
@@ -133,7 +133,7 @@ export default function AttendeeManager({
                     onChange={(e) => setFormName(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Name"
-                    className="flex-1 h-[42px] px-3 rounded-xl bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                    className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                   />
                   <RoleSelect
                     roles={apiRoles}
@@ -177,7 +177,7 @@ export default function AttendeeManager({
                   </div>
                 </div>
                 {!readOnly && (
-                  <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
+                  <div className="flex items-center gap-0.5 sm:opacity-0 sm:group-hover:opacity-100 opacity-60 transition-opacity duration-200 shrink-0">
                     <button
                       onClick={() => openEdit(a)}
                       className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 transition-all duration-200"
@@ -209,7 +209,7 @@ export default function AttendeeManager({
       {/* ── Add form ── */}
       {adding && (
         <div className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm">
-          <div className="flex gap-2 items-stretch">
+          <div className="flex flex-col sm:flex-row gap-2 items-stretch">
             <input
               autoFocus
               type="text"

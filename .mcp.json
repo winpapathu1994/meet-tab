@@ -4,8 +4,16 @@
       "type": "http",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "CONTEXT7_API_KEY"
+        "CONTEXT7_API_KEY": "ctx7sk-fdd1d687-10e2-41a7-98b5-0454e7fdab6b"
       }
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {}
     }
   }
 }

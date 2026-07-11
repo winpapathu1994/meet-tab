@@ -24,7 +24,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-gray-50 dark:bg-slate-900">
+      <body className="bg-slate-50 dark:bg-slate-950">
         <Providers>
           <NavBar />
           <PageContent>{children}</PageContent>
