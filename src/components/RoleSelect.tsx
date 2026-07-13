@@ -96,21 +96,21 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
         type="button"
         onClick={() => setOpen(!open)}
         onKeyDown={handleKeyDown}
-        className="w-full h-[42px] flex items-center gap-2.5 px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-left text-sm transition-colors focus:outline-none focus:border-primary"
+        className="w-full h-[42px] flex items-center gap-2.5 px-3 rounded-md bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-left text-sm transition-colors transition-shadow focus:outline-none focus:border-primary"
         aria-haspopup="listbox"
         aria-expanded={open}
       >
         <span className="text-base shrink-0">{icon}</span>
-        <span className="flex-1 min-w-0 text-gray-900 dark:text-white truncate">
+        <span className="flex-1 min-w-0 text-slate-900 dark:text-white truncate">
           {selected?.label ?? "Select role"}
         </span>
         {selected && (
-          <span className="text-gray-500 dark:text-slate-400 text-xs shrink-0 tabular-nums">
+          <span className="text-slate-500 dark:text-slate-400 text-xs shrink-0 tabular-nums">
             {fmtRate(selected.hourlyRate)}/hr
           </span>
         )}
         <svg
-          className={`w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -124,7 +124,7 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
         <div
           ref={listRef}
           role="listbox"
-          className="absolute z-20 left-0 right-0 mt-1 py-1 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 shadow-2xl shadow-gray-200/50 dark:shadow-black/40 origin-top"
+          className="absolute z-20 left-0 right-0 mt-1 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 shadow-2xl shadow-slate-200/50 dark:shadow-black/40 origin-top"
           style={{ animation: "roleDropIn 0.15s ease-out" }}
         >
           {roles.map((r) => {
@@ -139,8 +139,8 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
                 onClick={() => select(r._id)}
                 className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-left text-sm transition-colors ${
                   isSel
-                    ? "bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-white"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
+                    ? "bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
                 }`}
               >
                 {/* Colored dot + icon */}
@@ -148,7 +148,7 @@ export default function RoleSelect({ roles, value, onChange, onKeyDown, fmtRate 
                   {ri}
                 </span>
                 <span className="flex-1 truncate font-medium">{r.label}</span>
-                <span className="text-xs text-gray-500 dark:text-slate-400 tabular-nums shrink-0">
+                <span className="text-xs text-slate-500 dark:text-slate-400 tabular-nums shrink-0">
                   {fmtRate(r.hourlyRate)}/hr
                 </span>
                 {isSel && (

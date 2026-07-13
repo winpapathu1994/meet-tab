@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import Providers from "@/components/Providers";
 import NavBar from "@/components/NavBar";
 import PageContent from "@/components/PageContent";
@@ -23,8 +24,14 @@ export default function RootLayout({
             __html: `(function(){var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark")}})()`,
           }}
         />
+        <Script
+          defer
+          data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "localhost"}
+          data-api="/plausible/api/event"
+          src="/plausible/js/script.js"
+        />
       </head>
-      <body className="bg-gray-50 dark:bg-slate-900">
+      <body className="bg-slate-50 dark:bg-slate-950">
         <Providers>
           <NavBar />
           <PageContent>{children}</PageContent>

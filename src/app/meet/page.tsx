@@ -27,6 +27,19 @@ export default function MeetPage() {
   // Session name from URL (set when reusing a saved session)
   const [sessionName, setSessionName] = useState<string | null>(null);
 
+  // ── Onboarding banner ──
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined" && !localStorage.getItem("mettab_onboarded")) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  const dismissOnboarding = useCallback(() => {
+    setShowOnboarding(false);
+    localStorage.setItem("mettab_onboarded", "1");
+  }, []);
+
   // ── Share link detection ──
   const hasShareParams = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -59,6 +72,57 @@ export default function MeetPage() {
     return sum + (stRole?.hourlyRate ?? 0);
   }, 0);
   const hasRoles = attendees.length > 0;
+
+  // ── Per-role cost breakdown ──
+  const roleBreakdown = useMemo(() => {
+    const groups: Record<string, { label: string; hourlyRate: number; count: number; totalRate: number; color: string }> = {};
+    const colorMap: Record<string, string> = {
+      junior: "emerald",
+      senior: "amber",
+      manager: "violet",
+      designer: "pink",
+      qa: "cyan",
+      devops: "orange",
+    };
+
+    for (const a of attendees) {
+      let label = a.roleId;
+      let rate = 0;
+
+      if (a.hourlyRate > 0) {
+        rate = a.hourlyRate;
+        const api = apiRoles.find((r) => r._id === a.roleId);
+        if (api) label = api.label;
+        else {
+          const st = ROLES.find((r) => r.id === a.roleId);
+          if (st) label = st.label;
+        }
+      } else {
+        const api = apiRoles.find((r) => r._id === a.roleId);
+        if (api) { label = api.label; rate = api.hourlyRate; }
+        else {
+          const st = ROLES.find((r) => r.id === a.roleId);
+          if (st) { label = st.label; rate = st.hourlyRate; }
+        }
+      }
+
+      const key = a.roleId;
+      if (!groups[key]) {
+        const colorKey = Object.keys(colorMap).find(k => key.toLowerCase().includes(k));
+        groups[key] = {
+          label,
+          hourlyRate: rate,
+          count: 0,
+          totalRate: 0,
+          color: colorMap[colorKey ?? ""] ?? "slate",
+        };
+      }
+      groups[key].count++;
+      groups[key].totalRate += rate;
+    }
+
+    return Object.values(groups);
+  }, [attendees, apiRoles]);
 
   const handleShare = useCallback(async () => {
     try {
@@ -188,6 +252,48 @@ export default function MeetPage() {
             </div>
           )}
 
+          {/* Onboarding banner */}
+          {showOnboarding && !readOnly && (
+            <div className="w-full rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/20 p-4 relative">
+              <button
+                onClick={dismissOnboarding}
+                className="absolute top-3 right-3 p-1 rounded-lg text-primary/60 hover:text-primary hover:bg-primary/10 transition-colors"
+                aria-label="Dismiss tips"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <h3 className="text-sm font-semibold text-primary dark:text-primary mb-2">Quick tips to get started</h3>
+              <ul className="text-xs text-primary/80 dark:text-primary/80 space-y-1.5">
+                <li className="flex items-start gap-2">
+                  <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><strong>Currency toggle</strong> — switches between MMK, USD, and SGD</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  <span><strong>Edit attendees</strong> — hover a name to edit or remove</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                  <span><strong>Save as Preset</strong> — reuse attendee configs for recurring meetings</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                  <span><strong>Share links</strong> — copy link to let others view live cost</span>
+                </li>
+              </ul>
+            </div>
+          )}
+
           {/* Currency selector — subtle top-right feel */}
           <div className="self-end">
             <CurrencyToggle currency={currency} onChange={setCurrency} />
@@ -229,6 +335,13 @@ export default function MeetPage() {
             readOnly={readOnly}
           />
 
+          {/* Hint when Start is disabled */}
+          {!readOnly && state === "idle" && !hasRoles && (
+            <p className="text-xs text-slate-400 dark:text-slate-500 text-center -mt-2">
+              Add at least one attendee to start
+            </p>
+          )}
+
           {/* Sign-in prompt for guests */}
           {readOnly && (
             <p className="text-xs text-slate-400 dark:text-slate-500 text-center">
@@ -268,6 +381,7 @@ export default function MeetPage() {
               elapsedSeconds={elapsed}
               totalRatePerHour={totalRatePerHour}
               currency={currency}
+              roleBreakdown={roleBreakdown}
             />
           </div>
 

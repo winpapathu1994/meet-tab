@@ -5,3 +5,5 @@ dist/
 .DS_Store
 *.tsbuildinfo
 .env.local
+public/uploads/*
+!public/uploads/.gitkeep

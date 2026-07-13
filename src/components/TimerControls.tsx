@@ -57,7 +57,7 @@ export default function TimerControls({
       )}
 
       {!readOnly && state === "running" && (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 justify-center">
           <button
             onClick={onPause}
             className="group flex items-center gap-2 px-6 py-3 rounded-2xl border border-amber-200/60 dark:border-amber-500/20 bg-amber-50/80 dark:bg-amber-500/10 backdrop-blur-sm text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-500/20 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500/50 font-medium text-sm shadow-sm shadow-amber-500/10 hover:shadow-md transition-all duration-200"
@@ -80,7 +80,7 @@ export default function TimerControls({
       )}
 
       {!readOnly && state === "paused" && (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 justify-center">
           <button
             onClick={onResume}
             className="group flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-700 hover:to-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 text-white font-medium text-sm shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"

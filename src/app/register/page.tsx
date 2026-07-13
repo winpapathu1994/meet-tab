@@ -103,7 +103,7 @@ export default function RegisterPage() {
 
         {error && (
           <div className="text-sm">
-            <p className="text-red-400">{error}</p>
+            <p className="text-danger">{error}</p>
             {errorCode === "email_exists" && (
               <p className="text-slate-500 dark:text-slate-400 mt-1">
                 Already have an account?{" "}

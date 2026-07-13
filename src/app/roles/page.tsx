@@ -33,10 +33,10 @@ export default function RolesPage() {
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* ── Header ── */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Roles
           </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Customize hourly rates for each role
           </p>
         </div>

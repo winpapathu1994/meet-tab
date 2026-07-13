@@ -98,7 +98,7 @@ export default function SavePreset({ attendees }: Props) {
               }
             }}
             placeholder="Preset name (e.g. Sprint Planning)"
-            className="flex-1 px-3 py-2 bg-transparent text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none"
+            className="flex-1 px-3 py-2 bg-transparent text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none"
           />
           <button
             onClick={handleSave}
