@@ -254,29 +254,29 @@ export default function MeetPage() {
 
           {/* Onboarding banner */}
           {showOnboarding && !readOnly && (
-            <div className="w-full rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 p-4 relative">
+            <div className="w-full rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/20 p-4 relative">
               <button
                 onClick={dismissOnboarding}
-                className="absolute top-3 right-3 p-1 rounded-lg text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors"
+                className="absolute top-3 right-3 p-1 rounded-lg text-primary/60 hover:text-primary hover:bg-primary/10 transition-colors"
                 aria-label="Dismiss tips"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-2">Quick tips to get started</h3>
-              <ul className="text-xs text-blue-700 dark:text-blue-400 space-y-1.5">
+              <h3 className="text-sm font-semibold text-primary dark:text-primary mb-2">Quick tips to get started</h3>
+              <ul className="text-xs text-primary/80 dark:text-primary/80 space-y-1.5">
                 <li className="flex items-start gap-2">
                   <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span><strong>Currency toggle</strong> (top-right) switches between MMK, USD, and SGD</span>
+                  <span><strong>Currency toggle</strong> — switches between MMK, USD, and SGD</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
-                  <span><strong>Edit attendees</strong> — hover over a name to edit or remove</span>
+                  <span><strong>Edit attendees</strong> — hover a name to edit or remove</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -288,7 +288,7 @@ export default function MeetPage() {
                   <svg className="h-3.5 w-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                   </svg>
-                  <span><strong>Share links</strong> — copy link during a meeting to let others view live cost</span>
+                  <span><strong>Share links</strong> — copy link to let others view live cost</span>
                 </li>
               </ul>
             </div>

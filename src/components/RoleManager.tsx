@@ -45,8 +45,8 @@ const ICON_BG_COLORS: Record<string, string> = {
 
 const DEFAULT_ICON = "👤";
 const DEFAULT_ACCENT = "border-t-slate-300 dark:border-t-slate-600 bg-white dark:bg-slate-800";
-const DEFAULT_BADGE = "bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-slate-300";
-const DEFAULT_ICON_BG = "bg-gray-100 dark:bg-slate-700";
+const DEFAULT_BADGE = "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300";
+const DEFAULT_ICON_BG = "bg-slate-100 dark:bg-slate-700";
 
 function roleIcon(label: string): string {
   for (const [key, icon] of Object.entries(ROLE_ICONS)) {
@@ -180,13 +180,13 @@ export default function RoleManager() {
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-5 animate-pulse"
+              className="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-5 animate-pulse"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gray-200 dark:bg-slate-700" />
+                <div className="w-12 h-12 rounded-xl bg-slate-200 dark:bg-slate-700" />
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 w-24 bg-gray-200 dark:bg-slate-700 rounded" />
-                  <div className="h-3 w-16 bg-gray-100 dark:bg-slate-700 rounded" />
+                  <div className="h-4 w-24 bg-slate-200 dark:bg-slate-700 rounded" />
+                  <div className="h-3 w-16 bg-slate-100 dark:bg-slate-700 rounded" />
                 </div>
               </div>
             </div>
@@ -207,11 +207,16 @@ export default function RoleManager() {
           {/* ── Role card grid ── */}
           {roles.length === 0 && !adding ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-                <span className="text-2xl">👥</span>
+              <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                <svg className="h-8 w-8 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                </svg>
               </div>
-              <p className="text-gray-500 dark:text-slate-400 text-sm">
-                No custom roles defined. Add one or use the built-in defaults.
+              <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                No custom roles yet
+              </h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs">
+                Add custom roles to track costs for your team's specific positions.
               </p>
             </div>
           ) : (
@@ -237,10 +242,10 @@ export default function RoleManager() {
                           onChange={(e) => setFormLabel(e.target.value)}
                           onKeyDown={handleKeyDown}
                           placeholder="Role label"
-                          className="w-full px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                          className="w-full px-3 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
                         />
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-gray-500 dark:text-slate-400 shrink-0">MMK</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">MMK</span>
                           <input
                             type="number"
                             value={formRate}
@@ -248,14 +253,14 @@ export default function RoleManager() {
                             onKeyDown={handleKeyDown}
                             placeholder="Hourly rate"
                             min={0}
-                            className="flex-1 px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                            className="flex-1 px-3 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
                           />
-                          <span className="text-xs text-gray-500 dark:text-slate-400 shrink-0">/hr</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">/hr</span>
                         </div>
                         <div className="flex gap-2 justify-end pt-1">
                           <button
                             onClick={cancel}
-                            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                            className="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                           >
                             Cancel
                           </button>
@@ -282,7 +287,7 @@ export default function RoleManager() {
                 return (
                   <div
                     key={role._id}
-                    className={`group relative rounded-2xl border-t-[3px] border border-gray-200 dark:border-slate-700 ${accent} shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5`}
+                    className={`group relative rounded-2xl border-t-[3px] border border-slate-200 dark:border-slate-700 ${accent} shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5`}
                   >
                     <div className="p-5">
                       <div className="flex items-start gap-4">
@@ -295,7 +300,7 @@ export default function RoleManager() {
 
                         {/* Info */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                          <h3 className="font-semibold text-slate-900 dark:text-white truncate">
                             {role.label}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
@@ -305,11 +310,11 @@ export default function RoleManager() {
                           </div>
                         </div>
 
-                        {/* Action buttons — appear on hover */}
-                        <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 shrink-0">
+                        {/* Action buttons — always visible on mobile, hover on desktop */}
+                        <div className="flex items-center gap-0.5 sm:opacity-0 sm:group-hover:opacity-100 opacity-60 transition-opacity duration-150 shrink-0">
                           <button
                             onClick={() => openEdit(role)}
-                            className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors"
+                            className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
                             aria-label={`Edit ${role.label}`}
                             title="Edit"
                           >
@@ -319,7 +324,7 @@ export default function RoleManager() {
                           </button>
                           <button
                             onClick={() => setConfirmDelete(role)}
-                            className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-danger hover:bg-danger/10 transition-colors"
+                            className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-danger hover:bg-danger/10 transition-colors"
                             aria-label={`Delete ${role.label}`}
                             title="Delete"
                           >
@@ -345,10 +350,10 @@ export default function RoleManager() {
                       onChange={(e) => setFormLabel(e.target.value)}
                       onKeyDown={handleKeyDown}
                       placeholder="Role label"
-                      className="w-full px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                      className="w-full px-3 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
                     />
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500 dark:text-slate-400 shrink-0">MMK</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">MMK</span>
                       <input
                         type="number"
                         value={formRate}
@@ -356,14 +361,14 @@ export default function RoleManager() {
                         onKeyDown={handleKeyDown}
                         placeholder="Hourly rate"
                         min={0}
-                        className="flex-1 px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+                        className="flex-1 px-3 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
                       />
-                      <span className="text-xs text-gray-500 dark:text-slate-400 shrink-0">/hr</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">/hr</span>
                     </div>
                     <div className="flex gap-2 justify-end pt-1">
                       <button
                         onClick={cancel}
-                        className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                        className="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                       >
                         Cancel
                       </button>

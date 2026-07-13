@@ -124,7 +124,7 @@ export default function PresetsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 dark:border-slate-600 border-t-primary rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-slate-200 dark:border-slate-600 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -137,10 +137,10 @@ export default function PresetsPage() {
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* ── Header ── */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Preset Sessions
           </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {presets.length} preset{presets.length !== 1 ? "s" : ""} saved
           </p>
         </div>
@@ -151,10 +151,10 @@ export default function PresetsPage() {
             {Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 animate-pulse"
+                className="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 animate-pulse"
               >
-                <div className="h-5 w-48 bg-gray-200 dark:bg-slate-700 rounded mb-3" />
-                <div className="h-4 w-32 bg-gray-100 dark:bg-slate-700 rounded" />
+                <div className="h-5 w-48 bg-slate-200 dark:bg-slate-700 rounded mb-3" />
+                <div className="h-4 w-32 bg-slate-100 dark:bg-slate-700 rounded" />
               </div>
             ))}
           </div>
@@ -163,9 +163,9 @@ export default function PresetsPage() {
         {/* ── Empty state ── */}
         {!fetching && presets.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center mb-6">
+            <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-6">
               <svg
-                className="h-10 w-10 text-gray-400 dark:text-slate-500"
+                className="h-10 w-10 text-slate-400 dark:text-slate-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -178,10 +178,10 @@ export default function PresetsPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-slate-300 mb-2">
+            <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">
               No saved presets
             </h3>
-            <p className="text-sm text-gray-500 dark:text-slate-400 max-w-xs">
+            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs">
               Save a session as a preset from the MeetTab to quickly reuse attendee configurations.
             </p>
             <button
@@ -207,7 +207,7 @@ export default function PresetsPage() {
               return (
                 <div
                   key={preset._id}
-                  className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-gray-300 dark:hover:border-slate-600 transition-all shadow-sm hover:shadow-md"
+                  className="group rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all shadow-sm hover:shadow-md"
                 >
                   {/* ── Card header ── */}
                   <button
@@ -226,16 +226,16 @@ export default function PresetsPage() {
 
                     {/* Main info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                      <h3 className="font-semibold text-slate-900 dark:text-white truncate">
                         {preset.name}
                       </h3>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 dark:text-slate-400">
+                      <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-400">
                         <span>
                           {preset.attendees.length} attendee{preset.attendees.length !== 1 ? "s" : ""}
                         </span>
-                        <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                         <span>{formatRate(totalRate)}</span>
-                        <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                         <span>
                           {new Date(preset.createdAt).toLocaleDateString("en-US", {
                             month: "short",
@@ -249,7 +249,7 @@ export default function PresetsPage() {
                     {/* Expand chevron */}
                     <div className="shrink-0">
                       <svg
-                        className={`h-5 w-5 text-gray-400 dark:text-slate-500 transition-transform duration-200 ${
+                        className={`h-5 w-5 text-slate-400 dark:text-slate-500 transition-transform duration-200 ${
                           isOpen ? "rotate-180" : ""
                         }`}
                         fill="none"
@@ -264,10 +264,10 @@ export default function PresetsPage() {
 
                   {/* ── Expanded detail ── */}
                   {isOpen && (
-                    <div className="px-5 pb-5 border-t border-gray-100 dark:border-slate-700/50">
+                    <div className="px-5 pb-5 border-t border-slate-100 dark:border-slate-700/50">
                       {/* Attendee breakdown */}
                       <div className="mt-4">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-3">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                           Attendees
                         </h4>
                         <div className="space-y-2">
@@ -281,10 +281,10 @@ export default function PresetsPage() {
                                   {(a.name || "?")[0].toUpperCase()}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-gray-800 dark:text-slate-200 truncate">
+                                  <p className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">
                                     {a.name || "Unnamed"}
                                   </p>
-                                  <p className="text-xs text-gray-500 dark:text-slate-400">
+                                  <p className="text-xs text-slate-500 dark:text-slate-400">
                                     {roleLabel(a.roleId)} · {resolveRate(a, apiRoles).toLocaleString("en-US")} MMK/hr
                                   </p>
                                 </div>
@@ -298,18 +298,18 @@ export default function PresetsPage() {
                         {Array.from(roleCounts.entries()).map(([roleId, count]) => (
                             <span
                               key={roleId}
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-slate-700/50 text-xs text-gray-600 dark:text-slate-300"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/50 text-xs text-slate-600 dark:text-slate-300"
                             >
                               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                               {roleLabel(roleId)}
-                              <span className="text-gray-400 dark:text-slate-500">×{count}</span>
+                              <span className="text-slate-400 dark:text-slate-500">×{count}</span>
                             </span>
                           ))}
                       </div>
 
                       {/* Actions row */}
-                      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700/50 flex items-center justify-between">
-                        <span className="text-xs text-gray-400 dark:text-slate-500">
+                      <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50 flex items-center justify-between">
+                        <span className="text-xs text-slate-400 dark:text-slate-500">
                           Created {new Date(preset.createdAt).toLocaleDateString("en-US", {
                             weekday: "short",
                             month: "short",

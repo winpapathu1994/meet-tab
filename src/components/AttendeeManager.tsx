@@ -107,15 +107,22 @@ export default function AttendeeManager({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-gray-600 dark:text-slate-300 uppercase tracking-wider">
+      <h2 className="text-lg font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
         Attendees
       </h2>
 
       {/* ── Attendee list ── */}
       {attendees.length === 0 && !adding ? (
-        <p className="text-gray-400 dark:text-slate-500 text-sm text-center py-4">
-          No attendees yet. Add one to get started.
-        </p>
+        <div className="flex flex-col items-center py-6 text-center">
+          <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3">
+            <svg className="h-6 w-6 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>
+          </div>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            No attendees yet. Add one to get started.
+          </p>
+        </div>
       ) : (
         <ul className="space-y-1">
           {attendees.map((a) =>
@@ -123,7 +130,7 @@ export default function AttendeeManager({
               /* ── Edit row ── */
               <li
                 key={a.id}
-                className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm"
+                className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"
               >
                 <div className="flex flex-col sm:flex-row gap-2 items-stretch">
                   <input
@@ -133,7 +140,7 @@ export default function AttendeeManager({
                     onChange={(e) => setFormName(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Name"
-                    className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                    className="h-12 h-[42px] px-3 rounded-md bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors transition-shadow"
                   />
                   <RoleSelect
                     roles={apiRoles}
@@ -163,15 +170,15 @@ export default function AttendeeManager({
               /* ── Display row ── */
               <li
                 key={a.id}
-                className="group flex items-center justify-between gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50/80 dark:hover:bg-slate-800/50 border-b border-gray-100 dark:border-slate-800/50"
+                className="group flex items-center justify-between gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50/80 dark:hover:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800/50"
               >
                 <div className="flex-1 min-w-0">
-                  <div className="text-gray-900 dark:text-white font-medium truncate">
+                  <div className="text-slate-900 dark:text-white font-medium truncate">
                     {a.name || (
-                      <span className="text-gray-400 dark:text-slate-500 italic">Unnamed</span>
+                      <span className="text-slate-400 dark:text-slate-500 italic">Unnamed</span>
                     )}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-slate-400">
+                  <div className="text-sm text-slate-500 dark:text-slate-400">
                     {roleInfo(a.roleId, a.hourlyRate).label} · {sym}{" "}
                     {fmtRate(roleInfo(a.roleId, a.hourlyRate).hourlyRate)}/hr
                   </div>
@@ -208,7 +215,7 @@ export default function AttendeeManager({
 
       {/* ── Add form ── */}
       {adding && (
-        <div className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm">
+        <div className="flex flex-col gap-2 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
           <div className="flex flex-col sm:flex-row gap-2 items-stretch">
             <input
               autoFocus
@@ -217,7 +224,7 @@ export default function AttendeeManager({
               onChange={(e) => setFormName(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Name"
-              className="flex-1 h-[42px] px-3 rounded-md bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:border-primary"
+              className="h-12 sm:h-[42px] px-3 rounded-md bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary transition-colors transition-shadow"
             />
             <RoleSelect
               roles={apiRoles}
@@ -260,10 +267,10 @@ export default function AttendeeManager({
 
       {/* ── Footer ── */}
       {attendees.length > 0 && (
-        <div className="pt-3 text-right text-gray-500 dark:text-slate-400 text-sm border-t border-gray-100 dark:border-slate-800/50">
+        <div className="pt-3 text-right text-slate-500 dark:text-slate-400 text-sm border-t border-slate-100 dark:border-slate-800/50">
           {attendees.length}{" "}
           {attendees.length === 1 ? "person" : "people"} ·{" "}
-          <span className="text-gray-900 dark:text-white font-semibold">
+          <span className="text-slate-900 dark:text-white font-semibold">
             {sym} {fmtRate(totalRate)}/hr
           </span>
         </div>

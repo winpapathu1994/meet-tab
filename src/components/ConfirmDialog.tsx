@@ -56,31 +56,31 @@ export default function ConfirmDialog({
         aria-modal="true"
         aria-labelledby="confirm-title"
         aria-describedby="confirm-message"
-        className="relative z-10 w-full max-w-sm mx-4 p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-2xl"
+        className="relative z-10 w-full max-w-sm mx-4 p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl"
       >
         <h2
           id="confirm-title"
-          className="text-lg font-semibold text-gray-900 dark:text-white"
+          className="text-lg font-semibold text-slate-900 dark:text-white"
         >
           {title}
         </h2>
         <p
           id="confirm-message"
-          className="mt-2 text-sm text-gray-500 dark:text-slate-400"
+          className="mt-2 text-sm text-slate-500 dark:text-slate-400"
         >
           {message}
         </p>
         <div className="mt-6 flex gap-3 justify-end">
           <button
             onClick={onCancel}
-            className="px-4 py-2 rounded-md text-sm font-medium bg-secondary hover:bg-secondary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary/50 text-white transition-colors"
+            className="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-500/50 transition-colors"
           >
             {cancelLabel}
           </button>
           <button
             ref={confirmRef}
             onClick={onConfirm}
-            className="px-4 py-2 rounded-md text-sm font-medium bg-danger hover:bg-danger-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 text-white transition-colors"
+            className="px-4 py-2 rounded-xl text-sm font-medium bg-danger hover:bg-danger-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-danger/50 text-white transition-colors"
           >
             {confirmLabel}
           </button>

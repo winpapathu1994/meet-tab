@@ -89,7 +89,7 @@ export default function LoginPage() {
 
         {error && (
           <div className="text-sm">
-            <p className="text-red-400">{error}</p>
+            <p className="text-danger">{error}</p>
             {errorCode === "email_not_found" && (
               <p className="text-slate-500 dark:text-slate-400 mt-1">
                 {`Don't have an account? `}

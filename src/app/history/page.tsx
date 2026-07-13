@@ -175,10 +175,10 @@ export default function HistoryPage() {
         {/* ── Header ── */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               Session History
             </h1>
-            <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded
             </p>
           </div>
@@ -201,10 +201,10 @@ export default function HistoryPage() {
             {Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 animate-pulse"
+                className="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 animate-pulse"
               >
-                <div className="h-5 w-48 bg-gray-200 dark:bg-slate-700 rounded mb-3" />
-                <div className="h-4 w-32 bg-gray-100 dark:bg-slate-700 rounded" />
+                <div className="h-5 w-48 bg-slate-200 dark:bg-slate-700 rounded mb-3" />
+                <div className="h-4 w-32 bg-slate-100 dark:bg-slate-700 rounded" />
               </div>
             ))}
           </div>
@@ -213,9 +213,9 @@ export default function HistoryPage() {
         {/* ── Empty state ── */}
         {!fetching && sessions.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center mb-6">
+            <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-6">
               <svg
-                className="h-10 w-10 text-gray-400 dark:text-slate-500"
+                className="h-10 w-10 text-slate-400 dark:text-slate-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -228,10 +228,10 @@ export default function HistoryPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-slate-300 mb-2">
+            <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">
               No sessions yet
             </h3>
-            <p className="text-sm text-gray-500 dark:text-slate-400 max-w-xs">
+            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs">
               Start a meeting and end it to save your first session history record.
             </p>
             <button
@@ -256,7 +256,7 @@ export default function HistoryPage() {
               return (
                 <div
                   key={session._id}
-                  className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-gray-300 dark:hover:border-slate-600 transition-all shadow-sm hover:shadow-md"
+                  className="group rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all shadow-sm hover:shadow-md"
                 >
                   {/* ── Card header (always visible) ── */}
                   <button
@@ -264,28 +264,28 @@ export default function HistoryPage() {
                     className="w-full text-left p-4 sm:p-5 flex items-center gap-3 sm:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 rounded-2xl"
                   >
                     {/* Date badge */}
-                    <div className="shrink-0 w-14 h-14 rounded-xl bg-gray-100 dark:bg-slate-700/50 flex-col items-center justify-center hidden sm:flex">
-                      <span className="text-[10px] font-semibold uppercase text-gray-500 dark:text-slate-400 leading-none">
+                    <div className="shrink-0 w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex-col items-center justify-center hidden sm:flex">
+                      <span className="text-[10px] font-semibold uppercase text-slate-500 dark:text-slate-400 leading-none">
                         {new Date(session.createdAt).toLocaleDateString(
                           "en-US",
                           { month: "short" },
                         )}
                       </span>
-                      <span className="text-xl font-bold text-gray-800 dark:text-white leading-none mt-0.5">
+                      <span className="text-xl font-bold text-slate-800 dark:text-white leading-none mt-0.5">
                         {new Date(session.createdAt).getDate()}
                       </span>
                     </div>
 
                     {/* Main info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                      <h3 className="font-semibold text-slate-900 dark:text-white truncate">
                         {session.sessionName}
                       </h3>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 dark:text-slate-400">
+                      <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-400">
                         <span>{formatTime(session.createdAt)}</span>
-                        <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                         <span>{formatDuration(session.elapsedSeconds)}</span>
-                        <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                         <span>
                           {session.attendees.length} attendee
                           {session.attendees.length !== 1 ? "s" : ""}
@@ -295,7 +295,7 @@ export default function HistoryPage() {
 
                     {/* Cost */}
                     <div className="shrink-0 text-right">
-                      <div className="text-lg font-bold text-gray-900 dark:text-white tabular-nums">
+                      <div className="text-lg font-bold text-slate-900 dark:text-white tabular-nums">
                         {formatCost(session.totalCostMMK, session.currency)}
                       </div>
                     </div>
@@ -303,7 +303,7 @@ export default function HistoryPage() {
                     {/* Expand chevron */}
                     <div className="shrink-0">
                       <svg
-                        className={`h-5 w-5 text-gray-400 dark:text-slate-500 transition-transform duration-200 ${
+                        className={`h-5 w-5 text-slate-400 dark:text-slate-500 transition-transform duration-200 ${
                           isOpen ? "rotate-180" : ""
                         }`}
                         fill="none"
@@ -322,10 +322,10 @@ export default function HistoryPage() {
 
                   {/* ── Expanded detail ── */}
                   {isOpen && (
-                    <div className="px-5 pb-5 border-t border-gray-100 dark:border-slate-700/50">
+                    <div className="px-5 pb-5 border-t border-slate-100 dark:border-slate-700/50">
                       {/* Attendee breakdown */}
                       <div className="mt-4">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-3">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                           Attendees
                         </h4>
                         <div className="space-y-2">
@@ -339,10 +339,10 @@ export default function HistoryPage() {
                                 {(a.name || "?")[0].toUpperCase()}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-800 dark:text-slate-200 truncate">
+                                <p className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">
                                   {a.name || "Unnamed"}
                                 </p>
-                                <p className="text-xs text-gray-500 dark:text-slate-400">
+                                <p className="text-xs text-slate-500 dark:text-slate-400">
                                   {roleLabel(a.roleId)} · {CURRENCY_SYMBOLS[session.currency]}{" "}
                                   {session.currency === "MMK"
                                     ? a.hourlyRate.toLocaleString("en-US")
@@ -351,7 +351,7 @@ export default function HistoryPage() {
                                 </p>
                               </div>
                               {session.elapsedSeconds > 0 && (
-                                <div className="text-xs text-gray-500 dark:text-slate-400 tabular-nums">
+                                <div className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">
                                   ~{formatCost(a.hourlyRate * (session.elapsedSeconds / 3600), session.currency)}
                                 </div>
                               )}
@@ -361,12 +361,12 @@ export default function HistoryPage() {
                       </div>
 
                       {/* Summary row */}
-                      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700/50 flex items-center justify-between">
-                        <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-slate-400">
+                      <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50 flex items-center justify-between">
+                        <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
                           <span>{formatDate(session.createdAt)}</span>
-                          <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                           <span>{formatDuration(session.elapsedSeconds)}</span>
-                          <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
+                          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
                           <span>
                             Avg{" "}
                             {session.attendees.length > 0 && session.elapsedSeconds > 0
