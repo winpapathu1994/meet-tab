@@ -41,7 +41,7 @@ section.lead h1 { border-bottom:none; }
 
 # MeetTab
 
-## Meeting Cost Live Counter — see what your meetings really cost
+## Smart Meeting Cost Tracker — see what your meetings really cost
 
 **Your Name** · @winpapathu1994 · vibecode.tours
 

@@ -1,5 +1,5 @@
 
-# Meeting Cost Live Counter (MeetTab) — Report
+# Smart Meeting Cost Tracker (MeetTab) — Report
 
 github_username: winpapathu1994
 personal_repo_url: https://github.com/winpapathu1994/meet-tab.git

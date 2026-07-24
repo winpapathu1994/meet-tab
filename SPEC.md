@@ -1,4 +1,4 @@
-# Meeting Cost Live Counter (MeetTab) — Spec by @winpapathu1994
+# Smart Meeting Cost Tracker (MeetTab) — Spec by @winpapathu1994
 
 **Repository description:** A privacy-first meeting cost timer with JWT authentication. Login to CRUD roles, manage named attendees, save/reuse preset sessions with snapshotted hourly rates, share a link (public view-only), and review session history — no salaries exposed. Dark/light mode.
 
