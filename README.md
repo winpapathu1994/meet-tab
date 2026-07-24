@@ -2,7 +2,7 @@
 
 # 📊 MeetTab
 
-### Meeting Cost Live Counter
+### Smart Meeting Cost Tracker
 
 <p>A privacy-first meeting cost timer that shows the real-time cost of your meetings on a projector — using role-based market rate presets instead of anyone's actual salary.</p>
 
